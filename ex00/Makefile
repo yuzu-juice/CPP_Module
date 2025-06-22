@@ -1,7 +1,6 @@
 NAME	= megaphone
 MAIN = srcs/main.c
 SRCS	= main.cpp
-HEADERS	= main.hpp
 
 OBJS	= $(SRCS:.cpp=.o)
 
@@ -12,9 +11,9 @@ CFLAGS	= -Wall -Werror -Wextra -std=c++98
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -I $(HEADERS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
-%.o: %.c $(HEADERS)
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
