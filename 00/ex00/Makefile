@@ -5,13 +5,15 @@ SRCS	= main.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 CC	= c++
-CFLAGS	= -Wall -Werror -Wextra -std=c++98
+CFLAGS	= -Wall -Werror -Wextra
+CSTD	= -std=c++98
+GTEST	= -lgtest_main -lgtest
 
 .DEFAULT:	all
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(CSTD) -o $(NAME) $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -23,5 +25,8 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+test:
+	$(CC) $(CSTD) ./gtest.cpp $(GTEST)
 
 .PHONY: all clean fclean re
