@@ -45,6 +45,19 @@
 		"span": "cpp",
 		"stdexcept": "cpp",
 		"streambuf": "cpp",
-		"typeinfo": "cpp"
+		"typeinfo": "cpp",
+		"__bit_reference": "cpp",
+		"__config": "cpp",
+		"__hash_table": "cpp",
+		"__split_buffer": "cpp",
+		"bitset": "cpp",
+		"locale": "cpp",
+		"version": "cpp"
+	},
+	"github.copilot.enable": {
+		"*": false,
+		"plaintext": false,
+		"markdown": false,
+		"scminput": false
 	}
 }
