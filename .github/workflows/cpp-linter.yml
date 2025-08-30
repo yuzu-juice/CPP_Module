@@ -4,6 +4,7 @@ on:
   push:
     branches:
         - "**"
+    paths: ['**.cpp', '**.hpp', '**CMakeLists.txt']
 
 jobs:
   cpp-linter:
@@ -16,9 +17,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          style: file
+          style: 'file'
+          tidy-checks: ''
           files-changed-only: false
           thread-comments: false
+          extra-args: '-Wall -Werror -Wextra -std=c++98'
 
       - name: Fail fast?!
         if: steps.linter.outputs.checks-failed > 0

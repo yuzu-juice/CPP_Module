@@ -7,7 +7,6 @@ OBJS	= $(SRCS:.cpp=.o)
 CC	= c++
 CFLAGS	= -Wall -Werror -Wextra
 CSTD	= -std=c++98
-GTEST	= -lgtest_main -lgtest
 
 .DEFAULT:	all
 all: $(NAME)
