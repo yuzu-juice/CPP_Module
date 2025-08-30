@@ -3,8 +3,8 @@
 #include "main.hpp"
 
 TEST(MegaphoneTest, BasicAssertions) {
-  EXPECT_EQ("AAA", megaphone("aaa"));
-  EXPECT_EQ("AAA", megaphone("AAA"));
+  EXPECT_EQ("AAAA", megaphone("aaaa"));
+  EXPECT_EQ("AAAA", megaphone("AAAA"));
   EXPECT_EQ("", megaphone(""));
   EXPECT_EQ("___", megaphone("___"));
   EXPECT_EQ("_A!_'_A", megaphone("_A!_'_a"));
