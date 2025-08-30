@@ -1,4 +1,4 @@
-NAME	= megaphone
+NAME	= phonebook
 MAIN = srcs/main.c
 SRCS	= main.cpp
 HEADERS	= main.hpp
@@ -25,4 +25,9 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+test:
+	cmake -S ../.. -B ../../build
+	cmake --build ../../build
+	../../build/00/ex01/ex01_test
+
+.PHONY: all clean fclean re test
