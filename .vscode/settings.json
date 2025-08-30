@@ -1,4 +1,10 @@
 {
+	"C_Cpp.clang_format_style": "Google",
+	"editor.formatOnSave": true,
+	"editor.formatOnType": true,
+	"[cpp]": {
+		"editor.tabSize": 4,
+	},
 	"files.associations": {
 		"ostream": "cpp",
 		"array": "cpp",
