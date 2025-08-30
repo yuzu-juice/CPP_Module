@@ -4,7 +4,7 @@ on:
   push:
     branches:
         - "**"
-    paths: ['**.cpp', '**.hpp', '**CMakeLists.txt', '!**.test.cpp']
+    paths: ['**.cpp', '**.hpp', '**CMakeLists.txt']
 
 jobs:
   cpp-linter:
