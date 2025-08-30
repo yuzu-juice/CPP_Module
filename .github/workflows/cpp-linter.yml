@@ -5,6 +5,8 @@ on:
     branches:
         - "**"
     paths: ['**.cpp', '**.hpp', '**CMakeLists.txt']
+    paths-ignore:
+      - '**.test.cpp'
 
 jobs:
   cpp-linter:

@@ -2,7 +2,7 @@ enable_testing()
 
 add_executable(
   ex00_test
-  ex00_test.cpp
+  ex00.test.cpp
   megaphone.cpp
   main.hpp
 )
