@@ -27,6 +27,8 @@ fclean: clean
 re: fclean all
 
 test:
-	$(CC) $(CSTD) ./gtest.cpp $(GTEST)
+	cmake -S ../.. -B ../../build
+	cmake --build ../../build
+	../../build/00/ex00/ex00_test
 
 .PHONY: all clean fclean re

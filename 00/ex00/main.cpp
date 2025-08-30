@@ -1,6 +1,5 @@
 # include <iostream>
-
-std::string	megaphone(std::string str);
+# include "main.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,15 +14,4 @@ int main(int argc, char *argv[])
 	}
 	std::cout << std::endl;
 	return (0);
-}
-
-std::string	megaphone(std::string s)
-{
-	std::string	transformed_s;
-
-	for (std::string::iterator it = s.begin(); it != s.end(); it++)
-	{
-		transformed_s += std::toupper(*it);
-	}
-	return (transformed_s);
 }
