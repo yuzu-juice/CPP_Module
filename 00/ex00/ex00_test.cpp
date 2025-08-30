@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "main.h"
+#include "main.hpp"
 
 TEST(MegaphoneTest, BasicAssertions) {
   EXPECT_EQ("AAA", megaphone("aaa"));

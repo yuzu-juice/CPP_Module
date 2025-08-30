@@ -4,7 +4,7 @@ add_executable(
   ex00_test
   ex00_test.cpp
   megaphone.cpp
-  main.h
+  main.hpp
 )
 target_link_libraries(
   ex00_test
