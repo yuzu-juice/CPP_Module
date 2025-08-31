@@ -1,7 +1,7 @@
 #ifndef PHONEBOOK_CLASS_H_
 #define PHONEBOOK_CLASS_H_
 
-#include <queue>
+#include <array>
 
 #include "contact.class.hpp"
 
@@ -9,11 +9,14 @@ class PhoneBook {
  public:
   PhoneBook(void);
   ~PhoneBook(void);
-  void Add(Contact contact);
-  size_t ListSize();
+  void addContact(Contact contact);
+  std::array<Contact, 8> getAllContacts() const;
+  void displayAllConacts(std::array<Contact, 8>) const;
+  size_t getPhoneBookSize() const;
 
  private:
-  std::queue<Contact> _que;
+  std::array<Contact, 8> _array;
+  int _last_index = 0;
 };
 
 #endif

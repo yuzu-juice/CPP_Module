@@ -7,29 +7,43 @@ int main(int argc, char *argv[]) {
   PhoneBook phonebook;
   Contact contact;
   std::string input;
+  std::array<Contact, 8> allContacts;
 
   while (true) {
+    std::cout << "> ";
     std::cin >> input;
-    if (input == "ADD") {
-      std::cout << "last name?: ";
-      std::cin >> contact.last_name;
-      std::cout << "first name?: ";
-      std::cin >> contact.first_name;
-      std::cout << "nickname?: ";
-      std::cin >> contact.nickname;
-      std::cout << "phone number?: ";
-      std::cin >> contact.phone_number;
-      std::cout << "darkest secret?: ";
-      std::cin >> contact.darkest_secret;
-      phonebook.Add(contact);
-      std::cout << "Current phonebook size is " << phonebook.ListSize()
-                << std::endl;
-    } else if (input == "SEARCH")
-      std::cout << "SEARCH called" << std::endl;
-    else if (input == "EXIT")
+    if (std::cin.eof())
       break;
-    else
+    else if (input == "ADD") {
+      std::cout << "last name?: ";
+      std::cin >> input;
+      if (std::cin.eof()) break;
+      contact.setLastName(input);
+      std::cout << "first name?: ";
+      std::cin >> input;
+      if (std::cin.eof()) break;
+      contact.setFirstName(input);
+      std::cout << "nickname?: ";
+      std::cin >> input;
+      if (std::cin.eof()) break;
+      contact.setNickname(input);
+      std::cout << "phone number?: ";
+      std::cin >> input;
+      if (std::cin.eof()) break;
+      contact.setPhoneNumber(input);
+      std::cout << "darkest secret?: ";
+      std::cin >> input;
+      if (std::cin.eof()) break;
+      contact.setDarkestSecret(input);
+      phonebook.addContact(contact);
+    } else if (input == "SEARCH") {
+      allContacts = phonebook.getAllContacts();
+      phonebook.displayAllConacts(allContacts);
+    } else if (input == "EXIT") {
+      break;
+    } else {
       continue;
+    }
   }
   return (0);
 }
