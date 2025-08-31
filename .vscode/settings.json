@@ -79,7 +79,9 @@
 		"variant": "cpp",
 		"semaphore": "cpp",
 		"condition_variable": "cpp",
-		"mutex": "cpp"
+		"mutex": "cpp",
+		"main": "cpp",
+		"queue": "cpp"
 	},
 	"github.copilot.enable": {
 		"*": false,

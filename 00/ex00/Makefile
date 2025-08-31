@@ -30,4 +30,4 @@ test:
 	cmake --build ../../build
 	../../build/00/ex00/ex00_test
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test

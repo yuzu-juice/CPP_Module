@@ -1,20 +1,20 @@
 NAME	= phonebook
 MAIN = srcs/main.c
-SRCS	= main.cpp
-HEADERS	= main.hpp
+SRCS	= main.cpp phonebook.class.cpp contact.class.cpp
 
 OBJS	= $(SRCS:.cpp=.o)
 
 CC	= c++
-CFLAGS	= -Wall -Werror -Wextra -std=c++98
+CFLAGS	= -Wall -Werror -Wextra
+CSTD	= -std=c++98
 
 .DEFAULT:	all
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -I $(HEADERS)
+	$(CC) $(CFLAGS) $(CSTD) -o $(NAME) $(OBJS)
 
-%.o: %.c $(HEADERS)
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
