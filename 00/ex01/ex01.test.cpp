@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "contact.hpp"
-#include "phonebook.hpp"
+#include "contact.class.hpp"
+#include "phonebook.class.hpp"
 
 TEST(PhoneBookTest, BasicAssertions) {}
 TEST(ContactTest, BasicAssertions) {}

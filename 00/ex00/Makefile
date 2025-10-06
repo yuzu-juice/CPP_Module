@@ -1,6 +1,6 @@
 NAME	= megaphone
 MAIN = srcs/main.c
-SRCS	= main.cpp
+SRCS	= main.cpp megaphone.cpp
 
 OBJS	= $(SRCS:.cpp=.o)
 
@@ -22,6 +22,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -rf ../../build
 
 re: fclean all
 
