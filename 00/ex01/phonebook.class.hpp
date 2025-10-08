@@ -18,6 +18,7 @@ class PhoneBook {
 
  private:
   std::string format(std::string) const;
+  std::string format(size_t) const;
   Contact _array[8];
   int _last_index;
 };

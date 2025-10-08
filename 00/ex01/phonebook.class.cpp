@@ -36,7 +36,7 @@ void PhoneBook::displayAllContacts(const Contact allContacts[8]) const {
   std::cout << "|----------|----------|----------|----------|" << std::endl;
   for (size_t i = 0; i < getPhoneBookSize(); ++i) {
     std::cout << "|";
-    std::cout << format(std::to_string(i));
+    std::cout << format(i);
     std::cout << "|";
     std::cout << format(allContacts[i].getFirstName());
     std::cout << "|";
@@ -62,5 +62,11 @@ std::string PhoneBook::format(std::string str) const {
   } else if (len > 10) {
     ret = str.substr(0, 9) + ".";
   }
+  return ret;
+}
+
+std::string PhoneBook::format(size_t i) const {
+  std::string ret = "         ";
+  ret += static_cast<char>('0' + i);
   return ret;
 }

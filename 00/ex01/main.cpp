@@ -21,7 +21,6 @@ int main(void) {
     } else if (input == "SEARCH") {
       search(phonebook);
     } else if (input == "EXIT") {
-      std::cout << "bye." << std::endl;
       break;
     } else if (input.empty()) {
       continue;
