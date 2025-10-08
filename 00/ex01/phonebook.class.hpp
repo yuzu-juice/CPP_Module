@@ -9,12 +9,15 @@ class PhoneBook {
  public:
   PhoneBook(void);
   ~PhoneBook(void);
-  void addContact(Contact contact);
-  std::array<Contact, 8> getAllContacts() const;
-  void displayAllConacts(std::array<Contact, 8>) const;
-  size_t getPhoneBookSize() const;
+  void addContact(Contact);
+  std::array<Contact, 8> getAllContacts(void) const;
+  Contact getContact(size_t) const;
+  void displayContact(Contact) const;
+  void displayAllContacts(std::array<Contact, 8>) const;
+  size_t getPhoneBookSize(void) const;
 
  private:
+  std::string format(std::string) const;
   std::array<Contact, 8> _array;
   int _last_index = 0;
 };

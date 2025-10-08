@@ -81,7 +81,17 @@
 		"condition_variable": "cpp",
 		"mutex": "cpp",
 		"main": "cpp",
-		"queue": "cpp"
+		"queue": "cpp",
+		"ios": "cpp",
+		"__locale": "cpp",
+		"__node_handle": "cpp",
+		"__tree": "cpp",
+		"__verbose_abort": "cpp",
+		"charconv": "cpp",
+		"complex": "cpp",
+		"execution": "cpp",
+		"print": "cpp",
+		"stack": "cpp"
 	},
 	"github.copilot.enable": {
 		"*": false,

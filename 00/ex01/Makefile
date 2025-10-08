@@ -1,5 +1,4 @@
 NAME	= phonebook
-MAIN = srcs/main.c
 SRCS	= main.cpp phonebook.class.cpp contact.class.cpp
 
 OBJS	= $(SRCS:.cpp=.o)
@@ -31,4 +30,7 @@ test:
 	cmake --build ../../build
 	../../build/00/ex01/ex01_test
 
-.PHONY: all clean fclean re test
+format:
+	clang-format -i -style=Google $(SRCS)
+
+.PHONY: all clean fclean re test format
