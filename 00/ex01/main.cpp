@@ -7,7 +7,7 @@ void print_welcome_message(void);
 void add(PhoneBook* phonebook);
 void search(PhoneBook phonebook);
 
-int main(int argc, char* argv[]) {
+int main(void) {
   PhoneBook phonebook;
   std::string input;
 
@@ -91,7 +91,7 @@ void add(PhoneBook* phonebook) {
 
 void search(PhoneBook phonebook) {
   std::string input;
-  std::array<Contact, 8> allContacts;
+  const Contact* allContacts;
   size_t index;
 
   allContacts = phonebook.getAllContacts();

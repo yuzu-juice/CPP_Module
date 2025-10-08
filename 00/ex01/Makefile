@@ -14,7 +14,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(CSTD) -o $(NAME) $(OBJS)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CSTD) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
