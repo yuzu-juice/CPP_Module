@@ -3,10 +3,10 @@ enable_testing()
 add_executable(
   ex01_test
   ex01.test.cpp
-  contact.cpp
-  contact.hpp
-  phonebook.cpp
-  phonebook.hpp
+  Contact.cpp
+  Contact.hpp
+  PhoneBook.cpp
+  PhoneBook.hpp
 )
 target_link_libraries(
   ex01_test
