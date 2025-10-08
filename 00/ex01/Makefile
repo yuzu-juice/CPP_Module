@@ -13,7 +13,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(CSTD) -o $(NAME) $(OBJS)
 
-%.o: %.c
+%.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -31,6 +31,6 @@ test:
 	../../build/00/ex01/ex01_test
 
 format:
-	clang-format -i -style=Google $(SRCS)
+	clang-format -i -style=Google *.cpp *.hpp
 
 .PHONY: all clean fclean re test format

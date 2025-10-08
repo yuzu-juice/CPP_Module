@@ -34,7 +34,7 @@ void PhoneBook::displayContact(Contact contact) const {
 void PhoneBook::displayAllContacts(std::array<Contact, 8> allContacts) const {
   std::cout << "|     index|first name| last name|  nickname|" << std::endl;
   std::cout << "|----------|----------|----------|----------|" << std::endl;
-  for (int i = 0; i < getPhoneBookSize(); ++i) {
+  for (size_t i = 0; i < getPhoneBookSize(); ++i) {
     std::cout << "|";
     std::cout << format(std::to_string(i));
     std::cout << "|";
