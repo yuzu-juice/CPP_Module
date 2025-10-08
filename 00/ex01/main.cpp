@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "contact.class.hpp"
-#include "phonebook.class.hpp"
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
 void print_welcome_message(void);
 void add(PhoneBook* phonebook);

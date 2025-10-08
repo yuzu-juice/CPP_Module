@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "contact.class.hpp"
-#include "phonebook.class.hpp"
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
 TEST(AddContactTest, AddSingleContact) {
   PhoneBook pb;

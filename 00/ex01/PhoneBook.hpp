@@ -1,9 +1,9 @@
-#ifndef PHONEBOOK_CLASS_H_
-#define PHONEBOOK_CLASS_H_
+#ifndef PHONEBOOK_HPP_
+#define PHONEBOOK_HPP_
 
 #include <array>
 
-#include "contact.class.hpp"
+#include "Contact.hpp"
 
 class PhoneBook {
  public:

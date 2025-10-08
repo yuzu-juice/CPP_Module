@@ -1,6 +1,8 @@
-#ifndef CONTACT_CLASS_H_
-#define CONTACT_CLASS_H_
+#ifndef CONTACT_CLASS_HPP_
+#define CONTACT_CLASS_HPP_
+
 #include <string>
+
 class Contact {
  public:
   Contact(void);
