@@ -100,16 +100,15 @@ void search(PhoneBook phonebook) {
     std::cout << "Interrupted by user." << std::endl;
     return;
   }
-  if (input.length() > 2) {
+  if (input.length() > 1) {
     std::cout << "index is invalid." << std::endl;
     return;
   }
-  try {
-    index = std::stoi(input);
-  } catch (const std::invalid_argument& e) {
+  if (input[0] < '0' || '9' < input[0]) {
     std::cout << "index is invalid." << std::endl;
     return;
   }
+  index = static_cast<char>(input[0] - '0');
   size_t phonebook_size = phonebook.getPhoneBookSize();
   if (phonebook_size == 0 || index < 0 || index >= phonebook_size) {
     std::cout << "index is invalid." << std::endl;
