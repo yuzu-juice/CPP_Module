@@ -1,5 +1,5 @@
-NAME	= megaphone
-SRCS	= main.cpp megaphone.cpp
+NAME	= zombie
+SRCS	= main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 
 OBJS	= $(SRCS:.cpp=.o)
 
@@ -20,13 +20,10 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -rf ../../build
 
 re: fclean all
 
-test:
-	cmake -S ../.. -B ../../build
-	cmake --build ../../build
-	../../build/00/ex00/ex00_test
+format:
+	clang-format -i -style=Google *.cpp *.hpp
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re format
