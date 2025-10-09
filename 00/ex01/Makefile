@@ -4,17 +4,16 @@ SRCS	= main.cpp PhoneBook.cpp Contact.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 CC	= c++
-CFLAGS	= -Wall -Werror -Wextra
-CSTD	= -std=c++98
+CFLAGS	= -Wall -Werror -Wextra -std=c++98
 
 .DEFAULT:	all
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(CSTD) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) $(CSTD) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
