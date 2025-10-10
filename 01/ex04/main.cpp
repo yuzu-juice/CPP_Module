@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
     printError(fail_to_open_infile);
     return 1;
   }
+
   std::string content((std::istreambuf_iterator<char>(infile)),
                       std::istreambuf_iterator<char>());
   infile.close();
@@ -27,12 +28,15 @@ int main(int argc, char *argv[]) {
     content.insert(pos, s2);
     pos = content.find(s1, pos + s2.length());
   }
+
   std::string outFilename = std::string(argv[1]) + ".replace";
   std::ofstream outfile(outFilename.c_str());
+
   if (!outfile) {
     printError(fail_to_open_outfile);
     return 1;
   }
+
   outfile << content;
   outfile.close();
 }
