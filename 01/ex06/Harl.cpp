@@ -18,10 +18,19 @@ void Harl::complain(std::string level) {
   switch (i) {
     case 0:
       (this->*fptrs[0])();
+      (this->*fptrs[1])();
+      (this->*fptrs[2])();
+      (this->*fptrs[3])();
+      break;
     case 1:
       (this->*fptrs[1])();
+      (this->*fptrs[2])();
+      (this->*fptrs[3])();
+      break;
     case 2:
       (this->*fptrs[2])();
+      (this->*fptrs[3])();
+      break;
     case 3:
       (this->*fptrs[3])();
       break;
