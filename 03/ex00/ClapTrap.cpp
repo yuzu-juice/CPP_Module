@@ -2,9 +2,12 @@
 
 #include <iostream>
 
-ClapTrap::ClapTrap() { std::cout << "Constructor called." << std::endl; }
+ClapTrap::ClapTrap() : _hit_points(10), _energy_points(10), _attack_damage(0) {
+  std::cout << "Constructor called." << std::endl;
+}
 
-ClapTrap::ClapTrap(std::string name) : _name(name) {
+ClapTrap::ClapTrap(std::string name)
+    : _name(name), _hit_points(10), _energy_points(10), _attack_damage(0) {
   std::cout << "Constructor called with string." << std::endl;
 }
 
@@ -22,7 +25,11 @@ void ClapTrap::attack(const std::string &target) {
             << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &other) : {}
+ClapTrap::ClapTrap(const ClapTrap &other)
+    : _name(other._name),
+      _hit_points(other._hit_points),
+      _energy_points(other._energy_points),
+      _attack_damage(other._attack_damage) {}
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
   if (this != &other) {
