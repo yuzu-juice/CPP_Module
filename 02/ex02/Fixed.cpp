@@ -13,6 +13,8 @@ Fixed::Fixed(const float i) {
   this->setRawBits(static_cast<int>(roundf(i * (1 << this->fraction_bits))));
 }
 
+Fixed::~Fixed() {}
+
 Fixed &Fixed::operator=(const Fixed &other) {
   if (this != &other) this->setRawBits(other.getRawBits());
   return *this;
@@ -38,28 +40,28 @@ bool Fixed::operator!=(const Fixed &other) {
   return this->value != other.value;
 }
 
-Fixed &Fixed::operator+(const Fixed &other) {
-  Fixed *result = new Fixed(this->toFloat() + other.toFloat());
+Fixed Fixed::operator+(const Fixed &other) const {
+  Fixed result = Fixed(this->toFloat() + other.toFloat());
 
-  return *result;
+  return result;
 }
 
-Fixed &Fixed::operator-(const Fixed &other) {
-  Fixed *result = new Fixed(this->toFloat() - other.toFloat());
+Fixed Fixed::operator-(const Fixed &other) const {
+  Fixed result = Fixed(this->toFloat() - other.toFloat());
 
-  return *result;
+  return result;
 }
 
-Fixed &Fixed::operator*(const Fixed &other) {
-  Fixed *result = new Fixed(this->toFloat() * other.toFloat());
+Fixed Fixed::operator*(const Fixed &other) const {
+  Fixed result = Fixed(this->toFloat() * other.toFloat());
 
-  return *result;
+  return result;
 }
 
-Fixed &Fixed::operator/(const Fixed &other) {
-  Fixed *result = new Fixed(this->toFloat() / other.toFloat());
+Fixed Fixed::operator/(const Fixed &other) const {
+  Fixed result = Fixed(this->toFloat() / other.toFloat());
 
-  return *result;
+  return result;
 }
 
 Fixed &Fixed::operator++() {
@@ -103,8 +105,6 @@ const Fixed &Fixed::max(const Fixed &fixed1, const Fixed &fixed2) {
   if (fixed1.value >= fixed2.value) return fixed1;
   return fixed2;
 }
-
-Fixed::~Fixed() {}
 
 int Fixed::getRawBits() const { return this->value; }
 
