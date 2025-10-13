@@ -46,7 +46,7 @@ void ClapTrap::takeDamage(unsigned int amount) {
               << std::endl;
     return;
   }
-  this->_hit_points--;
+  this->setHitPoints(this->getHitPoints() - amount);
   std::cout << "ClapTrap " << this->_name << " took " << amount << " damages."
             << std::endl;
   if (this->_hit_points <= 0)
