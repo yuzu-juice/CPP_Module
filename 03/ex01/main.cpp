@@ -1,9 +1,10 @@
 #include <iostream>
 
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main() {
-  ClapTrap test("test");
+  ScavTrap test("test");
 
   std::cout << "hit points: " << test.getHitPoints() << std::endl;
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;
@@ -18,4 +19,6 @@ int main() {
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;
   test.takeDamage(5);
   std::cout << "hit points: " << test.getHitPoints() << std::endl << std::endl;
+
+  test.guardGate();
 }
