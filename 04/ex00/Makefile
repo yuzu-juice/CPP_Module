@@ -1,10 +1,10 @@
-NAME	= DiamondTrap
-SRCS	= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
+NAME	= polymorphism
+SRCS	= main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
 
 OBJS	= $(SRCS:.cpp=.o)
 
 CC	= c++
-CFLAGS	= -Wall -Werror -Wextra -Wshadow -std=c++98
+CFLAGS	= -Wall -Werror -Wextra -std=c++98 -pedantic
 
 .DEFAULT:	all
 all: $(NAME)
@@ -22,6 +22,14 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+run: re
+	$(MAKE) clean
+	./$(NAME)
+
+valgrind: re
+	$(MAKE) clean
+	valgrind --leak-check=full ./$(NAME)
 
 format:
 	clang-format -i -style=Google *.cpp *.hpp
