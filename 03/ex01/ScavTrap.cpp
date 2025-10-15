@@ -30,7 +30,9 @@ ScavTrap::~ScavTrap() {
 
 // Copy assignment operator overload==========================
 ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
+  std::cout << "ScavTrap copy assignment operator called." << std::endl;
   if (this != &other) {
+    this->setName(other.getName());
     this->setHitPoints(other.getHitPoints());
     this->setEnergyPoints(other.getEnergyPoints());
     this->setAttackDamage(other.getAttackDamage());
