@@ -17,12 +17,7 @@ class ClapTrap {
   void takeDamage(unsigned int);
   void beRepaired(unsigned int);
 
-  void setName(std::string);
-  void setHitPoints(int);
-  void setEnergyPoints(int);
-  void setAttackDamage(int);
 
-  std::string getName() const;
   int getHitPoints() const;
   int getEnergyPoints() const;
   int getAttackDamage() const;
