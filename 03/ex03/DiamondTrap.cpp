@@ -32,7 +32,7 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other) {
   std::cout << "DiamondTrap copy assignment operator called." << std::endl;
   if (this != &other) {
     this->setName(other.DiamondTrap::getName());
-    this->ClapTrap::setName(other.DiamondTrap::getName() + "_clap_name");
+    this->ClapTrap::setName(other.ClapTrap::getName());
     this->setHitPoints(other.getHitPoints());
     this->setEnergyPoints(other.getEnergyPoints());
     this->setAttackDamage(other.getAttackDamage());
