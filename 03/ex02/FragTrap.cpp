@@ -51,19 +51,17 @@ void FragTrap::attack(const std::string &target) {
     return;
   }
   setEnergyPoints(getEnergyPoints() - 1);
-  std::cout << "FragTrap " << getName() << " attacks " << target
-            << ", causing " << getAttackDamage() << " points of damage!"
-            << std::endl;
+  std::cout << "FragTrap " << getName() << " attacks " << target << ", causing "
+            << getAttackDamage() << " points of damage!" << std::endl;
 }
 void FragTrap::takeDamage(unsigned int amount) {
   if (getHitPoints() <= 0) {
-    std::cout << "FragTrap " << getName() << " has already died."
-              << std::endl;
+    std::cout << "FragTrap " << getName() << " has already died." << std::endl;
     return;
   }
   setHitPoints(getHitPoints() - amount);
-  std::cout << "FragTrap " << getName() << " took " << amount
-            << " damages." << std::endl;
+  std::cout << "FragTrap " << getName() << " took " << amount << " damages."
+            << std::endl;
   if (getHitPoints() <= 0)
     std::cout << "FragTrap " << getName() << " is died." << std::endl;
 }
