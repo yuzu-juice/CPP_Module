@@ -1,20 +1,21 @@
 #include "ScavTrap.hpp"
 
+#include <algorithm>
 #include <iostream>
 
 // Constructor================================================
 ScavTrap::ScavTrap() {
   std::cout << "ScavTrap default constructor called." << std::endl;
-  setHitPoints(100);
-  setEnergyPoints(50);
-  setAttackDamage(20);
+  _hit_points = 100;
+  _energy_points = 50;
+  _attack_damage = 20;
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
+ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name) {
   std::cout << "ScavTrap constructor called with string." << std::endl;
-  setHitPoints(100);
-  setEnergyPoints(50);
-  setAttackDamage(20);
+  _hit_points = 100;
+  _energy_points = 50;
+  _attack_damage = 20;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other) {
@@ -32,10 +33,10 @@ ScavTrap::~ScavTrap() {
 ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
   std::cout << "ScavTrap copy assignment operator called." << std::endl;
   if (this != &other) {
-    setName(other.getName());
-    setHitPoints(other.getHitPoints());
-    setEnergyPoints(other.getEnergyPoints());
-    setAttackDamage(other.getAttackDamage());
+    _name = other._name;
+    _hit_points = other._hit_points;
+    _energy_points = other._energy_points;
+    _attack_damage = other._attack_damage;
   }
   return *this;
 }
@@ -43,47 +44,62 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
 
 // Method=====================================================
 void ScavTrap::attack(const std::string &target) {
-  if (getEnergyPoints() <= 0) {
+  if (_energy_points == 0) {
     std::cout << "ScavTrap can't attack because of lack of energy points."
               << std::endl;
     return;
   }
-  setEnergyPoints(getEnergyPoints() - 1);
-  std::cout << "ScavTrap " << getName() << " attacks " << target << ", causing "
-            << getAttackDamage() << " points of damage!" << std::endl;
+  if (_hit_points == 0) {
+    std::cout << "ScavTrap can't attack because it has died." << std::endl;
+    return;
+  }
+  --_energy_points;
+  std::cout << "ScavTrap " << _name << " attacks " << target << ", causing "
+            << this->getAttackDamage() << " points of damage!" << std::endl;
 }
 
 void ScavTrap::takeDamage(unsigned int amount) {
-  if (getHitPoints() <= 0) {
-    std::cout << "ScavTrap " << getName() << " has already died." << std::endl;
+  if (_hit_points == 0) {
+    std::cout << "ScavTrap " << _name << " has already died." << std::endl;
     return;
   }
-  setHitPoints(getHitPoints() - amount);
-  std::cout << "ScavTrap " << getName() << " took " << amount << " damages."
+  _hit_points = std::max((int)(_hit_points - amount), 0);
+  std::cout << "ScavTrap " << _name << " took " << amount << " damages."
             << std::endl;
-  if (getHitPoints() <= 0)
-    std::cout << "ScavTrap " << getName() << " is died." << std::endl;
+  if (_hit_points <= 0)
+    std::cout << "ScavTrap " << _name << " is died." << std::endl;
 }
 
 void ScavTrap::beRepaired(unsigned int amount) {
-  if (getEnergyPoints() <= 0) {
+  if (_energy_points == 0) {
     std::cout << "ScavTrap can't repair because of lack of energy points."
               << std::endl;
     return;
   }
-  setHitPoints(getHitPoints() + amount);
-  setEnergyPoints(getEnergyPoints() - 1);
-  std::cout << "ScavTrap " << getName() << " repaired " << amount
-            << " hit points." << std::endl;
+  if (_hit_points == 0) {
+    std::cout << "ScavTrap can't repair because it has died." << std::endl;
+    return;
+  }
+  _hit_points = std::min(_hit_points + amount, Limits::MAX_HP);
+  --_energy_points;
+  std::cout << "ScavTrap " << _name << " repaired " << amount << " hit points."
+            << std::endl;
 }
 
 void ScavTrap::guardGate() {
-  if (getEnergyPoints() <= 0) {
+  if (_energy_points == 0) {
     std::cout << "ScavTrap can't switch to Gate keeper mode because of lack of "
                  "energy points."
               << std::endl;
     return;
   }
+  if (_hit_points == 0) {
+    std::cout
+        << "ScavTrap can't switch to Gate keeper mode because it has died."
+        << std::endl;
+    return;
+  }
+
   std::cout << "ScavTrap " << getName() << " is now in Gate keeper mode."
             << std::endl;
 }
