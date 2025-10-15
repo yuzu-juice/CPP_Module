@@ -1,3 +1,6 @@
+#ifndef FRAGTRAP_HPP_
+#define FRAGTRAP_HPP_
+
 #include "ClapTrap.hpp"
 
 class FragTrap : public ClapTrap {
@@ -16,3 +19,5 @@ class FragTrap : public ClapTrap {
 
   void highFivesGuys();
 };
+
+#endif
