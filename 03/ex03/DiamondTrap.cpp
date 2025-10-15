@@ -5,19 +5,26 @@
 // Constructor================================================
 DiamondTrap::DiamondTrap() {
   std::cout << "DiamondTrap default constructor called." << std::endl;
+  setHitPoints(getHitPoints());
+  setEnergyPoints(getEnergyPoints());
+  setAttackDamage(getAttackDamage());
 }
 
-DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name") {
+DiamondTrap::DiamondTrap(const std::string &name)
+    : ClapTrap(name + "_clap_name") {
   std::cout << "DiamondTrap constructor called with string." << std::endl;
   _name = name;
-  setHitPoints(100);
-  setEnergyPoints(100);
-  setAttackDamage(30);
+  setHitPoints(getHitPoints());
+  setEnergyPoints(getEnergyPoints());
+  setAttackDamage(getAttackDamage());
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &other) : ClapTrap(other) {
   std::cout << "DiamondTrap copy constructor called." << std::endl;
   _name = other._name;
+  setHitPoints(other.getHitPoints());
+  setEnergyPoints(other.getEnergyPoints());
+  setAttackDamage(other.getAttackDamage());
 }
 // ===========================================================
 
@@ -41,32 +48,7 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other) {
 }
 // ===========================================================
 
-// Setter=====================================================
-void DiamondTrap::setHitPoints(int hit_points) {
-  FragTrap::setHitPoints(hit_points);
-}
-
-void DiamondTrap::setEnergyPoints(int energy_points) {
-  ScavTrap::setEnergyPoints(energy_points);
-}
-
-void DiamondTrap::setAttackDamage(int attack_damage) {
-  FragTrap::setAttackDamage(attack_damage);
-}
-// ===========================================================
-
-// Getter=====================================================
-int DiamondTrap::getHitPoints() const { return FragTrap::getHitPoints(); }
-
-int DiamondTrap::getEnergyPoints() const { return ScavTrap::getEnergyPoints(); }
-
-int DiamondTrap::getAttackDamage() const { return FragTrap::getAttackDamage(); }
-// ===========================================================
-
 // Method=====================================================
-void DiamondTrap::attack(const std::string &target) {
-  ScavTrap::attack(target);
-}
 void DiamondTrap::takeDamage(unsigned int amount) {
   if (getHitPoints() <= 0) {
     std::cout << "DiamondTrap " << _name << " has already died." << std::endl;
@@ -78,6 +60,7 @@ void DiamondTrap::takeDamage(unsigned int amount) {
   if (getHitPoints() <= 0)
     std::cout << "DiamondTrap " << _name << " is died." << std::endl;
 }
+
 void DiamondTrap::beRepaired(unsigned int amount) {
   if (getEnergyPoints() <= 0) {
     std::cout << "DiamondTrap can't repair because of lack of energy points."

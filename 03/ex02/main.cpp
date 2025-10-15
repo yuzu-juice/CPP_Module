@@ -40,6 +40,7 @@ void basic_test(FragTrap &test) {
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;
   test.takeDamage(5);
   std::cout << "hit points: " << test.getHitPoints() << std::endl;
+  test.highFivesGuys();
   std::cout << "==================================" << std::endl << std::endl;
 }
 

@@ -40,6 +40,7 @@ void basic_test(ScavTrap &test) {
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;
   test.takeDamage(5);
   std::cout << "hit points: " << test.getHitPoints() << std::endl;
+  test.guardGate();
   std::cout << "==================================" << std::endl << std::endl;
 }
 
