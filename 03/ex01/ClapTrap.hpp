@@ -7,9 +7,9 @@ class ClapTrap {
  public:
   ClapTrap();
   ClapTrap(std::string);
-  ~ClapTrap();
-
   ClapTrap(const ClapTrap &);
+
+  ~ClapTrap();
 
   ClapTrap &operator=(const ClapTrap &);
 

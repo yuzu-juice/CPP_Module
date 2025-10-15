@@ -1,13 +1,13 @@
 #include <iostream>
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
-void debug(ScavTrap &test);
+void debug(FragTrap &test);
 
 int main() {
-  ScavTrap test1("test1");
-  ScavTrap test2(test1);
-  ScavTrap test3;
+  FragTrap test1("test1");
+  FragTrap test2(test1);
+  FragTrap test3;
   test3 = test2;
 
   debug(test1);
@@ -17,7 +17,7 @@ int main() {
   return 0;
 }
 
-void debug(ScavTrap &test) {
+void debug(FragTrap &test) {
   std::cout << "Test==============================" << std::endl;
   std::cout << "hit points: " << test.getHitPoints() << std::endl;
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;
@@ -32,6 +32,6 @@ void debug(ScavTrap &test) {
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;
   test.takeDamage(5);
   std::cout << "hit points: " << test.getHitPoints() << std::endl;
-  test.guardGate();
+  test.highFivesGuys();
   std::cout << "==================================" << std::endl << std::endl;
 }
