@@ -21,7 +21,7 @@ void debug(ClapTrap &test) {
   std::cout << "Test==============================" << std::endl;
   std::cout << "hit points: " << test.getHitPoints() << std::endl;
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;
-  std::cout << "attack damage:" << test.getAttackDamage() << std::endl
+  std::cout << "attack damage: " << test.getAttackDamage() << std::endl
             << std::endl;
 
   test.attack("enemy");
