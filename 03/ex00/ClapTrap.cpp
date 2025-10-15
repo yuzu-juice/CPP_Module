@@ -22,7 +22,9 @@ ClapTrap::ClapTrap(const ClapTrap &other)
 // ===========================================================
 
 // Destructor=================================================
-ClapTrap::~ClapTrap() { std::cout << "Destructor called." << std::endl; }
+ClapTrap::~ClapTrap() {
+  std::cout << "ClapTrap destructor called." << std::endl;
+}
 // ===========================================================
 
 // Copy assignment operator overload==========================
@@ -70,33 +72,33 @@ void ClapTrap::attack(const std::string &target) {
     return;
   }
   this->setEnergyPoints(this->getEnergyPoints() - 1);
-  std::cout << "ClapTrap " << this->_name << " attacks " << target
-            << ", causing " << this->_attack_damage << " points of damage!"
+  std::cout << "ClapTrap " << this->getName() << " attacks " << target
+            << ", causing " << this->getAttackDamage() << " points of damage!"
             << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
   if (this->getHitPoints() <= 0) {
-    std::cout << "ClapTrap " << this->_name << " has already died."
+    std::cout << "ClapTrap " << this->getName() << " has already died."
               << std::endl;
     return;
   }
   this->setHitPoints(this->getHitPoints() - amount);
-  std::cout << "ClapTrap " << this->_name << " took " << amount << " damages."
-            << std::endl;
-  if (this->_hit_points <= 0)
-    std::cout << "ClapTrap " << this->_name << " is died." << std::endl;
+  std::cout << "ClapTrap " << this->getName() << " took " << amount
+            << " damages." << std::endl;
+  if (this->getHitPoints() <= 0)
+    std::cout << "ClapTrap " << this->getName() << " is died." << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
-  if (this->_energy_points <= 0) {
+  if (this->getEnergyPoints() <= 0) {
     std::cout << "ClapTrap can't repair because of lack of energy points."
               << std::endl;
     return;
   }
-  this->_hit_points += amount;
-  this->_energy_points--;
-  std::cout << "ClapTrap " << this->_name << " repaired " << amount
+  this->setHitPoints(this->getHitPoints() + amount);
+  this->setEnergyPoints(this->getEnergyPoints() - 1);
+  std::cout << "ClapTrap " << this->getName() << " repaired " << amount
             << " hit points." << std::endl;
 }
 // ===========================================================
