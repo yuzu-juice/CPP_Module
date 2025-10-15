@@ -24,14 +24,12 @@ fclean: clean
 re: fclean all
 
 run: re
-	$(MAKE) clean
 	./$(NAME)
 
 valgrind: re
-	$(MAKE) clean
 	valgrind --leak-check=full ./$(NAME)
 
 format:
 	clang-format -i -style=Google *.cpp *.hpp
 
-.PHONY: all clean fclean re format
+.PHONY: all clean fclean re run valgrind format

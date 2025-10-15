@@ -4,7 +4,7 @@ SRCS	= main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 CC	= c++
-CFLAGS	= -Wall -Werror -Wextra -std=c++98
+CFLAGS	= -Wall -Werror -Wextra -std=c++98 -pedantic
 
 .DEFAULT:	all
 all: $(NAME)
@@ -23,7 +23,13 @@ fclean: clean
 
 re: fclean all
 
+run: re
+	./$(NAME)
+
+valgrind: re
+	valgrind --leak-check=full ./$(NAME)
+
 format:
 	clang-format -i -style=Google *.cpp *.hpp
 
-.PHONY: all clean fclean re format
+.PHONY: all clean fclean re run valgrind format
