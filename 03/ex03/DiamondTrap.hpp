@@ -7,25 +7,25 @@
 class DiamondTrap : public ScavTrap, public FragTrap {
  public:
   DiamondTrap();
-  DiamondTrap(std::string);
+  DiamondTrap(const std::string&);
 
   ~DiamondTrap();
 
-  DiamondTrap(const DiamondTrap &);
+  DiamondTrap(const DiamondTrap&);
 
-  DiamondTrap &operator=(const DiamondTrap &);
+  DiamondTrap& operator=(const DiamondTrap&);
 
   std::string getName() const;
-  int getHitPoints() const;
-  int getEnergyPoints() const;
-  int getAttackDamage() const;
+  using FragTrap::getAttackDamage;
+  using FragTrap::getHitPoints;
+  using ScavTrap::getEnergyPoints;
 
   void setName(std::string);
-  void setHitPoints(int);
-  void setEnergyPoints(int);
-  void setAttackDamage(int);
+  using FragTrap::setAttackDamage;
+  using FragTrap::setHitPoints;
+  using ScavTrap::setEnergyPoints;
 
-  void attack(const std::string &);
+  using ScavTrap::attack;
   void takeDamage(unsigned int);
   void beRepaired(unsigned int);
 

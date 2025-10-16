@@ -1,5 +1,6 @@
 #include "ClapTrap.hpp"
 
+#include <algorithm>
 #include <iostream>
 
 // Constructor================================================
@@ -40,19 +41,41 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
 }
 // ===========================================================
 
+// Setter=====================================================
+void ClapTrap::setName(const std::string &name) { _name = name; }
+
+void ClapTrap::setHitPoints(const unsigned int hit_points) {
+  _hit_points = std::min(hit_points, Limits::MAX_HP);
+}
+
+void ClapTrap::setEnergyPoints(const unsigned int energy_points) {
+  _energy_points = std::min(energy_points, Limits::MAX_EP);
+}
+
+void ClapTrap::setAttackDamage(const unsigned int attack_damage) {
+  _attack_damage = std::min(attack_damage, Limits::MAX_DAMAGE);
+}
+// ===========================================================
+
 // Getter=====================================================
-int ClapTrap::getHitPoints() const { return this->_hit_points; }
+std::string ClapTrap::getName() const { return _name; }
 
-int ClapTrap::getEnergyPoints() const { return this->_energy_points; }
+unsigned int ClapTrap::getHitPoints() const { return _hit_points; }
 
-int ClapTrap::getAttackDamage() const { return this->_attack_damage; }
+unsigned int ClapTrap::getEnergyPoints() const { return _energy_points; }
+
+unsigned int ClapTrap::getAttackDamage() const { return _attack_damage; }
 // ===========================================================
 
 // Method=====================================================
 void ClapTrap::attack(const std::string &target) {
-  if (_energy_points <= 0) {
+  if (_energy_points == 0) {
     std::cout << "ClapTrap can't attack because of lack of energy points."
               << std::endl;
+    return;
+  }
+  if (_hit_points == 0) {
+    std::cout << "ClapTrap can't attack because it has died." << std::endl;
     return;
   }
   --_energy_points;
@@ -61,11 +84,11 @@ void ClapTrap::attack(const std::string &target) {
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-  if (this->getHitPoints() <= 0) {
+  if (_hit_points == 0) {
     std::cout << "ClapTrap " << _name << " has already died." << std::endl;
     return;
   }
-  _hit_points -= amount;
+  _hit_points = std::max((int)(_hit_points - amount), 0);
   std::cout << "ClapTrap " << _name << " took " << amount << " damages."
             << std::endl;
   if (_hit_points <= 0)
@@ -73,12 +96,16 @@ void ClapTrap::takeDamage(unsigned int amount) {
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
-  if (_energy_points <= 0) {
+  if (_energy_points == 0) {
     std::cout << "ClapTrap can't repair because of lack of energy points."
               << std::endl;
     return;
   }
-  _hit_points += amount;
+  if (_hit_points == 0) {
+    std::cout << "ClapTrap can't repair because it has died." << std::endl;
+    return;
+  }
+  _hit_points = std::min(_hit_points + amount, Limits::MAX_HP);
   --_energy_points;
   std::cout << "ClapTrap " << _name << " repaired " << amount << " hit points."
             << std::endl;
