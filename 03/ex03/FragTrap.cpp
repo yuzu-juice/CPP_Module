@@ -12,14 +12,14 @@ FragTrap::FragTrap() {
   _attack_damage = 30;
 }
 
-FragTrap::FragTrap(const std::string &name) : ClapTrap(name) {
+FragTrap::FragTrap(const std::string& name) : ClapTrap(name) {
   std::cout << "FragTrap constructor called with string." << std::endl;
   _hit_points = 100;
   _energy_points = 100;
   _attack_damage = 30;
 }
 
-FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other) {
+FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other) {
   std::cout << "FragTrap copy constructor called." << std::endl;
 }
 // ===========================================================
@@ -31,7 +31,7 @@ FragTrap::~FragTrap() {
 // ===========================================================
 
 // Copy assignment operator overload==========================
-FragTrap &FragTrap::operator=(const FragTrap &other) {
+FragTrap& FragTrap::operator=(const FragTrap& other) {
   std::cout << "FragTrap copy assignment operator called." << std::endl;
   if (this != &other) {
     _name = other._name;
@@ -44,7 +44,7 @@ FragTrap &FragTrap::operator=(const FragTrap &other) {
 // ===========================================================
 
 // Method=====================================================
-void FragTrap::attack(const std::string &target) {
+void FragTrap::attack(const std::string& target) {
   if (_energy_points == 0) {
     std::cout << "FragTrap can't attack because of lack of energy points."
               << std::endl;

@@ -2,11 +2,11 @@
 
 #include "DiamondTrap.hpp"
 
-void basic_test(DiamondTrap &test);
-void hp_exhaustion_test(DiamondTrap &test);
-void ep_exhaustion_test(DiamondTrap &test);
-void hp_max_cap_test(DiamondTrap &test);
-void take_big_damage_test(DiamondTrap &test);
+void basic_test(DiamondTrap& test);
+void hp_exhaustion_test(DiamondTrap& test);
+void ep_exhaustion_test(DiamondTrap& test);
+void hp_max_cap_test(DiamondTrap& test);
+void take_big_damage_test(DiamondTrap& test);
 
 int main() {
   DiamondTrap test1("test1");
@@ -25,7 +25,7 @@ int main() {
   return 0;
 }
 
-void basic_test(DiamondTrap &test) {
+void basic_test(DiamondTrap& test) {
   std::cout << "BASIC_TEST==============================" << std::endl;
   std::cout << "hit points: " << test.getHitPoints() << std::endl;
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;
@@ -44,7 +44,7 @@ void basic_test(DiamondTrap &test) {
   std::cout << "==================================" << std::endl << std::endl;
 }
 
-void hp_exhaustion_test(DiamondTrap &test) {
+void hp_exhaustion_test(DiamondTrap& test) {
   std::cout << "HP_EXHAUSTION_TEST======================" << std::endl;
   std::cout << "hit points: " << test.getHitPoints() << std::endl;
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;
@@ -58,10 +58,11 @@ void hp_exhaustion_test(DiamondTrap &test) {
   test.attack("enemy");
   test.beRepaired(10);
   test.takeDamage(1);
+  test.whoAmI();
   std::cout << "==================================" << std::endl << std::endl;
 }
 
-void ep_exhaustion_test(DiamondTrap &test) {
+void ep_exhaustion_test(DiamondTrap& test) {
   std::cout << "EP_EXHAUSTION_TEST======================" << std::endl;
   std::cout << "hit points: " << test.getHitPoints() << std::endl;
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;
@@ -74,10 +75,11 @@ void ep_exhaustion_test(DiamondTrap &test) {
 
   test.attack("enemy");
   test.beRepaired(10);
+  test.whoAmI();
   std::cout << "==================================" << std::endl << std::endl;
 }
 
-void hp_max_cap_test(DiamondTrap &test) {
+void hp_max_cap_test(DiamondTrap& test) {
   std::cout << "HP_MAX_CAP_TEST======================" << std::endl;
   std::cout << "hit points: " << test.getHitPoints() << std::endl;
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;
@@ -90,7 +92,7 @@ void hp_max_cap_test(DiamondTrap &test) {
   std::cout << "==================================" << std::endl << std::endl;
 }
 
-void take_big_damage_test(DiamondTrap &test) {
+void take_big_damage_test(DiamondTrap& test) {
   std::cout << "TAKE_BIG_DAMAGE_TEST=================" << std::endl;
   std::cout << "hit points: " << test.getHitPoints() << std::endl;
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;

@@ -13,7 +13,7 @@ ClapTrap::ClapTrap(std::string name)
   std::cout << "ClapTrap constructor called with string." << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &other)
+ClapTrap::ClapTrap(const ClapTrap& other)
     : _name(other._name),
       _hit_points(other._hit_points),
       _energy_points(other._energy_points),
@@ -29,7 +29,7 @@ ClapTrap::~ClapTrap() {
 // ===========================================================
 
 // Copy assignment operator overload==========================
-ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
+ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
   std::cout << "ClapTrap copy assignment operator called." << std::endl;
   if (this != &other) {
     _name = other._name;
@@ -42,7 +42,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
 // ===========================================================
 
 // Setter=====================================================
-void ClapTrap::setName(const std::string &name) { _name = name; }
+void ClapTrap::setName(const std::string& name) { _name = name; }
 
 void ClapTrap::setHitPoints(const unsigned int hit_points) {
   _hit_points = std::min(hit_points, Limits::MAX_HP);
@@ -68,7 +68,7 @@ unsigned int ClapTrap::getAttackDamage() const { return _attack_damage; }
 // ===========================================================
 
 // Method=====================================================
-void ClapTrap::attack(const std::string &target) {
+void ClapTrap::attack(const std::string& target) {
   if (_energy_points == 0) {
     std::cout << "ClapTrap can't attack because of lack of energy points."
               << std::endl;
