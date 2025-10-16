@@ -17,9 +17,11 @@ Cat::Cat(const Cat& other) : Animal(other) {
 // Copy assignment operator overload==========================
 Cat& Cat::operator=(const Cat& other) {
   std::cout << "Cat copy assignment operator called." << std::endl;
-  Animal::operator=(other);
-  delete _brain;
-  _brain = new Brain(*other._brain);
+  if (this != &other) {
+    Animal::operator=(other);
+    delete _brain;
+    _brain = new Brain(*other._brain);
+  }
   return *this;
 }
 // ===========================================================

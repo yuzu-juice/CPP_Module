@@ -17,9 +17,11 @@ Dog::Dog(const Dog& other) : Animal(other) {
 // Copy assignment operator overload==========================
 Dog& Dog::operator=(const Dog& other) {
   std::cout << "Dog copy assignment operator called." << std::endl;
-  Animal::operator=(other);
-  delete _brain;
-  _brain = new Brain(*other._brain);
+  if (this != &other) {
+    Animal::operator=(other);
+    delete _brain;
+    _brain = new Brain(*other._brain);
+  }
   return *this;
 }
 // ===========================================================
