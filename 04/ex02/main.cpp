@@ -13,5 +13,8 @@ int main() {
   inu->makeSound();
   neko->makeSound();
 
+  delete inu;
+  delete neko;
+
   return 0;
 }
