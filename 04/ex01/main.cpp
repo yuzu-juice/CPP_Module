@@ -37,6 +37,8 @@ int main() {
   std::cout << neko2->getBrain()->getIdea(1) << std::endl;
   std::cout << neko2->getBrain()->getIdea(2) << std::endl;
 
+  delete neko2;
+
   Dog* inu1 = new Dog();
   if (inu1 == NULL) return 1;
   inu1->getBrain()->setIdea(0, "inu idea 0");
@@ -58,6 +60,8 @@ int main() {
   std::cout << inu2->getBrain()->getIdea(0) << std::endl;
   std::cout << inu2->getBrain()->getIdea(1) << std::endl;
   std::cout << inu2->getBrain()->getIdea(2) << std::endl;
+
+  delete inu2;
 
   return 0;
 }
