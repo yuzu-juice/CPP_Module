@@ -1,0 +1,41 @@
+NAME	= polymorphism
+SRCS	= main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+
+OBJS	= $(SRCS:.cpp=.o)
+
+CC	= c++
+CFLAGS	= -Wall -Werror -Wextra -std=c++98 -pedantic
+
+.DEFAULT:	all
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJS)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+run: re
+	./$(NAME)
+
+valgrind: re
+	valgrind --leak-check=full ./$(NAME)
+
+
+CLANG_IMAGE := silkeh/clang:19
+
+CLANG_DOCKER := docker run --rm -v $$(pwd):/app -w /app $(CLANG_IMAGE) /bin/sh -c
+
+format:
+	$(CLANG_DOCKER)	\
+	"clang-format -i -style=file --verbose *.cpp *.hpp *.h"
+
+.PHONY: all clean fclean re run valgrind format
