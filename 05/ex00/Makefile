@@ -36,6 +36,6 @@ CLANG_DOCKER := docker run --rm -v $$(pwd):/app -w /app $(CLANG_IMAGE) /bin/sh -
 
 format:
 	$(CLANG_DOCKER)	\
-	"clang-format -i -style=file --verbose *.cpp *.hpp *.h"
+	"clang-format -i -style=file --verbose *.cpp *.hpp"
 
 .PHONY: all clean fclean re run valgrind format
