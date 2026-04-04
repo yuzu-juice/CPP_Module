@@ -1,5 +1,5 @@
-NAME	= polymorphism
-SRCS	= main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+NAME	= bureaucrat
+SRCS	= main.cpp Bureaucrat.cpp
 
 OBJS	= $(SRCS:.cpp=.o)
 

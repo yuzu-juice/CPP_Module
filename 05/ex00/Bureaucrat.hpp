@@ -1,6 +1,7 @@
 #ifndef BUREAUCRAT_HPP_
 #define BUREAUCRAT_HPP_
 
+#include <iostream>
 #include <string>
 
 class Bureaucrat {
@@ -10,14 +11,15 @@ private:
 
 public:
   Bureaucrat();
+  Bureaucrat(const std::string);
   Bureaucrat(const Bureaucrat &);
   Bureaucrat &operator=(const Bureaucrat &);
   ~Bureaucrat();
 
-  void setName(std::string s);
   std::string getName() const;
-  void setGrade(int i);
   int getGrade() const;
-}
+  void incrementGrade();
+  void decrementGrade();
+};
 
 #endif
