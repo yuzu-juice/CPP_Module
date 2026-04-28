@@ -25,7 +25,11 @@ re: fclean all
 
 CLANG_IMAGE := silkeh/clang:19
 
-CLANG_DOCKER := docker run --rm -v $$(pwd):/app -w /app $(CLANG_IMAGE) /bin/sh -c
+CLANG_DOCKER := docker run --rm \
+								-v $$(pwd):/app \
+								-v $$(realpath ../../.clang-format):/app/.clang-format \
+								-w /app \
+								$(CLANG_IMAGE) /bin/sh -c
 
 format:
 	$(CLANG_DOCKER)	\
