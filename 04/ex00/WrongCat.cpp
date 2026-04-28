@@ -10,6 +10,7 @@ WrongCat::WrongCat() : WrongAnimal("Cat") {
 WrongCat::WrongCat(const WrongCat &other) : WrongAnimal(other) {
   std::cout << "WrongCat copy constructor called." << std::endl;
 }
+
 // ===========================================================
 
 // Copy assignment operator overload==========================
@@ -20,14 +21,19 @@ WrongCat &WrongCat::operator=(const WrongCat &other) {
   }
   return *this;
 }
+
 // ===========================================================
 
 // Destructor=================================================
 WrongCat::~WrongCat() {
   std::cout << "WrongCat destructor called." << std::endl;
 }
+
 // ===========================================================
 
 // Method=====================================================
-void WrongCat::makeSound() const { std::cout << "Mrrr" << std::endl; }
+void WrongCat::makeSound() const {
+  std::cout << "Mrrr" << std::endl;
+}
+
 // ===========================================================

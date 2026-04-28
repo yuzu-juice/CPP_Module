@@ -14,6 +14,7 @@ WrongAnimal::WrongAnimal(const std::string &t) : type(t) {
 WrongAnimal::WrongAnimal(const WrongAnimal &other) : type(other.type) {
   std::cout << "WrongAnimal copy constructor called." << std::endl;
 }
+
 // ===========================================================
 
 // Copy assignment operator overload==========================
@@ -24,18 +25,26 @@ WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other) {
   }
   return *this;
 }
+
 // ===========================================================
 
 // Destructor=================================================
 WrongAnimal::~WrongAnimal() {
   std::cout << "WrongAnimal destructor called." << std::endl;
 }
+
 // ===========================================================
 
 // Getter=====================================================
-std::string WrongAnimal::getType() const { return type; }
+std::string WrongAnimal::getType() const {
+  return type;
+}
+
 // ===========================================================
 
 // Method=====================================================
-void WrongAnimal::makeSound() const { std::cout << "..." << std::endl; }
+void WrongAnimal::makeSound() const {
+  std::cout << "..." << std::endl;
+}
+
 // ===========================================================

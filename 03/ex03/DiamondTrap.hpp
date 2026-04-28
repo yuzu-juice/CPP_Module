@@ -5,15 +5,15 @@
 #include "ScavTrap.hpp"
 
 class DiamondTrap : public ScavTrap, public FragTrap {
- public:
+public:
   DiamondTrap();
-  DiamondTrap(const std::string&);
+  DiamondTrap(const std::string &);
 
   ~DiamondTrap();
 
-  DiamondTrap(const DiamondTrap&);
+  DiamondTrap(const DiamondTrap &);
 
-  DiamondTrap& operator=(const DiamondTrap&);
+  DiamondTrap &operator=(const DiamondTrap &);
 
   std::string getName() const;
   using FragTrap::getAttackDamage;
@@ -31,7 +31,7 @@ class DiamondTrap : public ScavTrap, public FragTrap {
 
   void whoAmI();
 
- private:
+private:
   std::string _name;
 };
 

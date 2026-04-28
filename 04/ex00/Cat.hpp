@@ -6,7 +6,7 @@
 #include "Animal.hpp"
 
 class Cat : public Animal {
-public:
+ public:
   Cat();
   Cat(const Cat &);
   Cat &operator=(const Cat &);

@@ -6,7 +6,7 @@
 #include "WrongAnimal.hpp"
 
 class WrongCat : public WrongAnimal {
-public:
+ public:
   WrongCat();
   WrongCat(const WrongCat &);
   WrongCat &operator=(const WrongCat &);

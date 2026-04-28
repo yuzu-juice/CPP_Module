@@ -5,11 +5,11 @@
 #include <string>
 
 class Bureaucrat {
-private:
+ private:
   const std::string _name;
   int _grade;
 
-public:
+ public:
   Bureaucrat();
   Bureaucrat(const std::string);
   Bureaucrat(const Bureaucrat &);
