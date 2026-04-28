@@ -7,9 +7,9 @@
 #include "WrongCat.hpp"
 
 int main() {
-  const Animal* meta = new Animal();
-  const Animal* inu = new Dog();
-  const Animal* neko = new Cat();
+  const Animal *meta = new Animal();
+  const Animal *inu = new Dog();
+  const Animal *neko = new Cat();
 
   std::cout << inu->getType() << std::endl;
   std::cout << neko->getType() << std::endl;
@@ -21,7 +21,7 @@ int main() {
   delete inu;
   delete neko;
 
-  const WrongAnimal* wrong_neko = new WrongCat();
+  const WrongAnimal *wrong_neko = new WrongCat();
   wrong_neko->makeSound();
 
   delete wrong_neko;

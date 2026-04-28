@@ -7,17 +7,17 @@ Animal::Animal() {
   std::cout << "Animal default constructor called." << std::endl;
 }
 
-Animal::Animal(const std::string& t) : type(t) {
+Animal::Animal(const std::string &t) : type(t) {
   std::cout << "Animal constructor with string called." << std::endl;
 }
 
-Animal::Animal(const Animal& other) : type(other.type) {
+Animal::Animal(const Animal &other) : type(other.type) {
   std::cout << "Animal copy constructor called." << std::endl;
 }
 // ===========================================================
 
 // Copy assignment operator overload==========================
-Animal& Animal::operator=(const Animal& other) {
+Animal &Animal::operator=(const Animal &other) {
   std::cout << "Animal copy assignment operator called." << std::endl;
   if (this != &other) {
     type = other.type;

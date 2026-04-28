@@ -4,18 +4,18 @@
 #include <string>
 
 class WrongAnimal {
- public:
+public:
   WrongAnimal();
-  WrongAnimal(const std::string&);
-  WrongAnimal(const WrongAnimal&);
-  WrongAnimal& operator=(const WrongAnimal&);
+  WrongAnimal(const std::string &);
+  WrongAnimal(const WrongAnimal &);
+  WrongAnimal &operator=(const WrongAnimal &);
   virtual ~WrongAnimal();
 
   std::string getType() const;
 
   void makeSound() const;
 
- protected:
+protected:
   std::string type;
 };
 
