@@ -13,30 +13,31 @@ void Harl::complain(std::string level) {
 
   int i;
   for (i = 0; i < 4; ++i) {
-    if (complains[i] == level) break;
+    if (complains[i] == level)
+      break;
   }
   switch (i) {
-    case 0:
-      (this->*fptrs[0])();
-      (this->*fptrs[1])();
-      (this->*fptrs[2])();
-      (this->*fptrs[3])();
-      break;
-    case 1:
-      (this->*fptrs[1])();
-      (this->*fptrs[2])();
-      (this->*fptrs[3])();
-      break;
-    case 2:
-      (this->*fptrs[2])();
-      (this->*fptrs[3])();
-      break;
-    case 3:
-      (this->*fptrs[3])();
-      break;
-    default:
-      std::cout << "[ Probably complaining about insignificant problems ]"
-                << std::endl;
+  case 0:
+    (this->*fptrs[0])();
+    (this->*fptrs[1])();
+    (this->*fptrs[2])();
+    (this->*fptrs[3])();
+    break;
+  case 1:
+    (this->*fptrs[1])();
+    (this->*fptrs[2])();
+    (this->*fptrs[3])();
+    break;
+  case 2:
+    (this->*fptrs[2])();
+    (this->*fptrs[3])();
+    break;
+  case 3:
+    (this->*fptrs[3])();
+    break;
+  default:
+    std::cout << "[ Probably complaining about insignificant problems ]"
+              << std::endl;
   }
 }
 
