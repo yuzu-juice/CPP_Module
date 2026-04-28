@@ -27,12 +27,14 @@ DiamondTrap::DiamondTrap(const DiamondTrap& other)
   _energy_points = other.ScavTrap::_energy_points;
   _attack_damage = other.FragTrap::_attack_damage;
 }
+
 // ===========================================================
 
 // Destructor=================================================
 DiamondTrap::~DiamondTrap() {
   std::cout << "DiamondTrap destructor called." << std::endl;
 }
+
 // ===========================================================
 
 // Copy assignment operator overload==========================
@@ -47,6 +49,7 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other) {
   }
   return *this;
 }
+
 // ===========================================================
 
 // Method=====================================================
