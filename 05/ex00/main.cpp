@@ -1,5 +1,6 @@
-#include "Bureaucrat.hpp"
 #include <exception>
+
+#include "Bureaucrat.hpp"
 
 int main() {
   Bureaucrat b = Bureaucrat();
