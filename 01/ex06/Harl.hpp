@@ -4,12 +4,12 @@
 #include <string>
 
 class Harl {
-public:
+ public:
   Harl();
   ~Harl();
   void complain(std::string);
 
-private:
+ private:
   void debug();
   void info();
   void warning();

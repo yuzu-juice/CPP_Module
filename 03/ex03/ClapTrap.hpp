@@ -7,10 +7,10 @@ namespace Limits {
 static const unsigned int MAX_HP = 1000;
 static const unsigned int MAX_EP = 1000;
 static const unsigned int MAX_DAMAGE = 1000;
-} // namespace Limits
+}  // namespace Limits
 
 class ClapTrap {
-public:
+ public:
   ClapTrap();
   ClapTrap(std::string);
   ClapTrap(const ClapTrap &);
@@ -33,7 +33,7 @@ public:
   unsigned int getEnergyPoints() const;
   unsigned int getAttackDamage() const;
 
-protected:
+ protected:
   std::string _name;
   unsigned int _hit_points;
   unsigned int _energy_points;

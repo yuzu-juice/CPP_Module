@@ -69,8 +69,7 @@ void ep_exhaustion_test(DiamondTrap &test) {
   std::cout << "attack damage: " << test.getAttackDamage() << std::endl
             << std::endl;
 
-  for (int i = 0; i < 100; ++i)
-    test.attack("enemy");
+  for (int i = 0; i < 100; ++i) test.attack("enemy");
   std::cout << "hit points: " << test.getHitPoints() << std::endl;
   std::cout << "energy points: " << test.getEnergyPoints() << std::endl;
 

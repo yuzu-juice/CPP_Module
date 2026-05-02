@@ -33,6 +33,7 @@ CLANG_DOCKER := docker run --rm \
 
 format:
 	$(CLANG_DOCKER)	\
-	"clang-format -i -style=file --verbose *.cpp *.hpp"
+	"clang-format -i -style=file --verbose *.cpp *.hpp" \
+	&& rm .clang-format
 
 .PHONY: all clean fclean re format tidy tidy-fix

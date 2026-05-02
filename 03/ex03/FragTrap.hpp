@@ -4,7 +4,7 @@
 #include "ClapTrap.hpp"
 
 class FragTrap : virtual public ClapTrap {
-public:
+ public:
   FragTrap();
   FragTrap(const std::string &);
   FragTrap(const FragTrap &);
