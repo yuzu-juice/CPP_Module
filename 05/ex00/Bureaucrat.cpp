@@ -21,28 +21,30 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
   return *this;
 }
 
-Bureaucrat::~Bureaucrat() {
-  std::cout << "[Destructor]" << std::endl;
-}
+Bureaucrat::~Bureaucrat() { std::cout << "[Destructor]" << std::endl; }
 
-std::string Bureaucrat::getName() const {
-  return _name;
-}
+std::string Bureaucrat::getName() const { return _name; }
 
-int Bureaucrat::getGrade() const {
-  return _grade;
-}
+int Bureaucrat::getGrade() const { return _grade; }
 
 void Bureaucrat::incrementGrade() {
   if (_grade <= 1) {
-    throw;
+    throw GradeTooHighException();
   }
   ++_grade;
 }
 
 void Bureaucrat::decrementGrade() {
   if (_grade >= 150) {
-    throw;
+    throw GradeTooLowException();
   }
   --_grade;
+}
+
+const char *Bureaucrat::GradeTooHighException::what() const throw() {
+  return ("Grade too high.");
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw() {
+  return ("Grade too low.");
 }
