@@ -27,11 +27,17 @@ Fixed &Fixed::operator=(const Fixed &other) {
   return *this;
 }
 
-Fixed::~Fixed() { std::cout << "Destructor called" << std::endl; }
+Fixed::~Fixed() {
+  std::cout << "Destructor called" << std::endl;
+}
 
-int Fixed::getRawBits() const { return this->value; }
+int Fixed::getRawBits() const {
+  return this->value;
+}
 
-void Fixed::setRawBits(int const raw) { this->value = raw; }
+void Fixed::setRawBits(int const raw) {
+  this->value = raw;
+}
 
 float Fixed::toFloat() const {
   return (float)this->getRawBits() / (1 << this->fraction_bits);

@@ -13,6 +13,7 @@ Brain::Brain(const Brain& other) {
     _ideas[i] = other._ideas[i];
   }
 }
+
 // ===========================================================
 
 // Copy assignment operator overload==========================
@@ -25,10 +26,14 @@ Brain& Brain::operator=(const Brain& other) {
   }
   return *this;
 }
+
 // ===========================================================
 
 // Destructor=================================================
-Brain::~Brain() { std::cout << "Brain destructor called." << std::endl; }
+Brain::~Brain() {
+  std::cout << "Brain destructor called." << std::endl;
+}
+
 // ===========================================================
 
 // Method=====================================================
@@ -41,4 +46,5 @@ std::string Brain::getIdea(size_t i) {
   if (i >= 100) return "";
   return _ideas[i];
 }
+
 // ===========================================================

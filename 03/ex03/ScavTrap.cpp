@@ -11,26 +11,28 @@ ScavTrap::ScavTrap() {
   _attack_damage = 20;
 }
 
-ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name) {
+ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name) {
   std::cout << "ScavTrap constructor called with string." << std::endl;
   _hit_points = 100;
   _energy_points = 50;
   _attack_damage = 20;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) {
+ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other) {
   std::cout << "ScavTrap copy constructor called." << std::endl;
 }
+
 // ===========================================================
 
 // Destructor=================================================
 ScavTrap::~ScavTrap() {
   std::cout << "ScavTrap destructor called." << std::endl;
 }
+
 // ===========================================================
 
 // Copy assignment operator overload==========================
-ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
+ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
   std::cout << "ScavTrap copy assignment operator called." << std::endl;
   if (this != &other) {
     _name = other._name;
@@ -40,10 +42,11 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
   }
   return *this;
 }
+
 // ===========================================================
 
 // Method=====================================================
-void ScavTrap::attack(const std::string& target) {
+void ScavTrap::attack(const std::string &target) {
   if (_energy_points == 0) {
     std::cout << "ScavTrap can't attack because of lack of energy points."
               << std::endl;
@@ -103,4 +106,5 @@ void ScavTrap::guardGate() {
   std::cout << "ScavTrap " << getName() << " is now in Gate keeper mode."
             << std::endl;
 }
+
 // ===========================================================

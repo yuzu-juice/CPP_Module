@@ -14,6 +14,7 @@ Animal::Animal(const std::string& t) : type(t) {
 Animal::Animal(const Animal& other) : type(other.type) {
   std::cout << "Animal copy constructor called." << std::endl;
 }
+
 // ===========================================================
 
 // Copy assignment operator overload==========================
@@ -24,16 +25,26 @@ Animal& Animal::operator=(const Animal& other) {
   }
   return *this;
 }
+
 // ===========================================================
 
 // Destructor=================================================
-Animal::~Animal() { std::cout << "Animal destructor called." << std::endl; }
+Animal::~Animal() {
+  std::cout << "Animal destructor called." << std::endl;
+}
+
 // ===========================================================
 
 // Getter=====================================================
-std::string Animal::getType() const { return type; }
+std::string Animal::getType() const {
+  return type;
+}
+
 // ===========================================================
 
 // Method=====================================================
-void Animal::makeSound() const { std::cout << "..." << std::endl; }
+void Animal::makeSound() const {
+  std::cout << "..." << std::endl;
+}
+
 // ===========================================================

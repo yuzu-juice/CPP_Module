@@ -10,7 +10,7 @@ DiamondTrap::DiamondTrap() {
   _attack_damage = FragTrap::_attack_damage;
 }
 
-DiamondTrap::DiamondTrap(const std::string& name)
+DiamondTrap::DiamondTrap(const std::string &name)
     : ClapTrap(name + "_clap_name") {
   std::cout << "DiamondTrap constructor called with string." << std::endl;
   _name = name;
@@ -19,7 +19,7 @@ DiamondTrap::DiamondTrap(const std::string& name)
   _attack_damage = FragTrap::_attack_damage;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& other)
+DiamondTrap::DiamondTrap(const DiamondTrap &other)
     : ClapTrap(other), ScavTrap(other), FragTrap(other) {
   std::cout << "DiamondTrap copy constructor called." << std::endl;
   _name = other._name;
@@ -27,16 +27,18 @@ DiamondTrap::DiamondTrap(const DiamondTrap& other)
   _energy_points = other.ScavTrap::_energy_points;
   _attack_damage = other.FragTrap::_attack_damage;
 }
+
 // ===========================================================
 
 // Destructor=================================================
 DiamondTrap::~DiamondTrap() {
   std::cout << "DiamondTrap destructor called." << std::endl;
 }
+
 // ===========================================================
 
 // Copy assignment operator overload==========================
-DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other) {
+DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other) {
   std::cout << "DiamondTrap copy assignment operator called." << std::endl;
   if (this != &other) {
     _name = other._name;
@@ -47,6 +49,7 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other) {
   }
   return *this;
 }
+
 // ===========================================================
 
 // Method=====================================================

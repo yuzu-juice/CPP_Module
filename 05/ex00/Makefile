@@ -1,10 +1,10 @@
-NAME	= DiamondTrap
-SRCS	= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
+NAME	= bureaucrat
+SRCS	= main.cpp Bureaucrat.cpp
 
 OBJS	= $(SRCS:.cpp=.o)
 
 CC	= c++
-CFLAGS	= -Wall -Werror -Wextra -Wshadow -std=c++98 -pedantic
+CFLAGS	= -Wall -Werror -Wextra -std=c++98 -pedantic
 
 .DEFAULT:	all
 all: $(NAME)
@@ -28,6 +28,7 @@ run: re
 
 valgrind: re
 	valgrind --leak-check=full ./$(NAME)
+
 
 CLANG_IMAGE := silkeh/clang:19
 
