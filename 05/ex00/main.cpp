@@ -5,15 +5,15 @@
 int main() {
   Bureaucrat b = Bureaucrat();
   // instantiate
-  std::cout << b.getGrade() << std::endl;
+  std::cout << b << std::endl;
 
   // increment grade
   b.incrementGrade();
-  std::cout << b.getGrade() << std::endl;
+  std::cout << b << std::endl;
 
   // decrement grade
   b.decrementGrade();
-  std::cout << b.getGrade() << std::endl;
+  std::cout << b << std::endl;
 
   // throw grade too high
   try {
@@ -21,6 +21,7 @@ int main() {
       b.incrementGrade();
     }
   } catch (std::exception &e) {
+    std::cout << b << std::endl;
     std::cerr << e.what() << std::endl;
   }
 
@@ -30,6 +31,7 @@ int main() {
       b.decrementGrade();
     }
   } catch (std::exception &e) {
+    std::cout << b << std::endl;
     std::cerr << e.what() << std::endl;
   }
 
