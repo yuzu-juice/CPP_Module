@@ -25,15 +25,11 @@ Cat &Cat::operator=(const Cat &other) {
 // ===========================================================
 
 // Destructor=================================================
-Cat::~Cat() {
-  std::cout << "Cat destructor called." << std::endl;
-}
+Cat::~Cat() { std::cout << "Cat destructor called." << std::endl; }
 
 // ===========================================================
 
 // Method=====================================================
-void Cat::makeSound() const {
-  std::cout << "Mrrr" << std::endl;
-}
+void Cat::makeSound() const { std::cout << "Mrrr" << std::endl; }
 
 // ===========================================================

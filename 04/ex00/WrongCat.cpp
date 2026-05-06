@@ -32,8 +32,6 @@ WrongCat::~WrongCat() {
 // ===========================================================
 
 // Method=====================================================
-void WrongCat::makeSound() const {
-  std::cout << "Mrrr" << std::endl;
-}
+void WrongCat::makeSound() const { std::cout << "Mrrr" << std::endl; }
 
 // ===========================================================

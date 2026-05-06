@@ -29,15 +29,11 @@ AAnimal& AAnimal::operator=(const AAnimal& other) {
 // ===========================================================
 
 // Destructor=================================================
-AAnimal::~AAnimal() {
-  std::cout << "AAnimal destructor called." << std::endl;
-}
+AAnimal::~AAnimal() { std::cout << "AAnimal destructor called." << std::endl; }
 
 // ===========================================================
 
 // Getter=====================================================
-std::string AAnimal::getType() const {
-  return type;
-}
+std::string AAnimal::getType() const { return type; }
 
 // ===========================================================

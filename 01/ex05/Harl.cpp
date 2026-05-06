@@ -2,11 +2,9 @@
 
 #include <iostream>
 
-Harl::Harl() {
-}
+Harl::Harl() {}
 
-Harl::~Harl() {
-}
+Harl::~Harl() {}
 
 void Harl::complain(std::string level) {
   void (Harl::* fptrs[4])() = {&Harl::debug, &Harl::info, &Harl::warning,

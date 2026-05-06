@@ -1,4 +1,0 @@
-BasedOnStyle: Google
-SeparateDefinitionBlocks: Always
-AllowShortFunctionsOnASingleLine: None
-InsertNewlineAtEOF: true

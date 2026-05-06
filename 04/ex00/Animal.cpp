@@ -29,22 +29,16 @@ Animal &Animal::operator=(const Animal &other) {
 // ===========================================================
 
 // Destructor=================================================
-Animal::~Animal() {
-  std::cout << "Animal destructor called." << std::endl;
-}
+Animal::~Animal() { std::cout << "Animal destructor called." << std::endl; }
 
 // ===========================================================
 
 // Getter=====================================================
-std::string Animal::getType() const {
-  return type;
-}
+std::string Animal::getType() const { return type; }
 
 // ===========================================================
 
 // Method=====================================================
-void Animal::makeSound() const {
-  std::cout << "..." << std::endl;
-}
+void Animal::makeSound() const { std::cout << "..." << std::endl; }
 
 // ===========================================================

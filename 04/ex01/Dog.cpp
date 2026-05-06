@@ -37,12 +37,8 @@ Dog::~Dog() {
 // ===========================================================
 
 // Method=====================================================
-void Dog::makeSound() const {
-  std::cout << "Woof" << std::endl;
-}
+void Dog::makeSound() const { std::cout << "Woof" << std::endl; }
 
-Brain* Dog::getBrain() const {
-  return _brain;
-}
+Brain* Dog::getBrain() const { return _brain; }
 
 // ===========================================================
