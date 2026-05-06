@@ -37,12 +37,8 @@ Cat::~Cat() {
 // ===========================================================
 
 // Method=====================================================
-void Cat::makeSound() const {
-  std::cout << "Mrrr" << std::endl;
-}
+void Cat::makeSound() const { std::cout << "Mrrr" << std::endl; }
 
-Brain* Cat::getBrain() const {
-  return _brain;
-}
+Brain* Cat::getBrain() const { return _brain; }
 
 // ===========================================================

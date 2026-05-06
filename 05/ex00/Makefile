@@ -29,18 +29,15 @@ run: re
 valgrind: re
 	valgrind --leak-check=full ./$(NAME)
 
-
 CLANG_IMAGE := silkeh/clang:19
 
 CLANG_DOCKER := docker run --rm \
 								-v $$(pwd):/app \
-								-v $$(realpath ../../.clang-format):/app/.clang-format \
 								-w /app \
 								$(CLANG_IMAGE) /bin/sh -c
 
 format:
-	$(CLANG_DOCKER)	\
-	"clang-format -i -style=file --verbose *.cpp *.hpp" \
-	&& rm .clang-format
+	$(CLANG_DOCKER) \
+	"clang-format -i -style=Google --verbose *.cpp *.hpp"
 
 .PHONY: all clean fclean re run valgrind format

@@ -36,15 +36,11 @@ WrongAnimal::~WrongAnimal() {
 // ===========================================================
 
 // Getter=====================================================
-std::string WrongAnimal::getType() const {
-  return type;
-}
+std::string WrongAnimal::getType() const { return type; }
 
 // ===========================================================
 
 // Method=====================================================
-void WrongAnimal::makeSound() const {
-  std::cout << "..." << std::endl;
-}
+void WrongAnimal::makeSound() const { std::cout << "..." << std::endl; }
 
 // ===========================================================

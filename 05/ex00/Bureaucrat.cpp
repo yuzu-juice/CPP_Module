@@ -23,22 +23,16 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
   return *this;
 }
 
-Bureaucrat::~Bureaucrat() {
-  std::cout << "[Destructor]" << std::endl;
-}
+Bureaucrat::~Bureaucrat() { std::cout << "[Destructor]" << std::endl; }
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &breaucrat) {
   os << breaucrat.getName() << ", breaucrat grade " << breaucrat.getGrade();
   return os;
 }
 
-std::string Bureaucrat::getName() const {
-  return _name;
-}
+std::string Bureaucrat::getName() const { return _name; }
 
-int Bureaucrat::getGrade() const {
-  return _grade;
-}
+int Bureaucrat::getGrade() const { return _grade; }
 
 void Bureaucrat::incrementGrade() {
   if (_grade <= 1) {

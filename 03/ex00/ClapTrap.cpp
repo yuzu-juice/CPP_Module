@@ -45,9 +45,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
 // ===========================================================
 
 // Setter=====================================================
-void ClapTrap::setName(const std::string &name) {
-  _name = name;
-}
+void ClapTrap::setName(const std::string &name) { _name = name; }
 
 void ClapTrap::setHitPoints(const unsigned int hit_points) {
   _hit_points = std::min(hit_points, Limits::MAX_HP);
@@ -64,21 +62,13 @@ void ClapTrap::setAttackDamage(const unsigned int attack_damage) {
 // ===========================================================
 
 // Getter=====================================================
-std::string ClapTrap::getName() const {
-  return _name;
-}
+std::string ClapTrap::getName() const { return _name; }
 
-unsigned int ClapTrap::getHitPoints() const {
-  return _hit_points;
-}
+unsigned int ClapTrap::getHitPoints() const { return _hit_points; }
 
-unsigned int ClapTrap::getEnergyPoints() const {
-  return _energy_points;
-}
+unsigned int ClapTrap::getEnergyPoints() const { return _energy_points; }
 
-unsigned int ClapTrap::getAttackDamage() const {
-  return _attack_damage;
-}
+unsigned int ClapTrap::getAttackDamage() const { return _attack_damage; }
 
 // ===========================================================
 

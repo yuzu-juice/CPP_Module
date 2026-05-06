@@ -23,7 +23,15 @@ fclean: clean
 
 re: fclean all
 
+CLANG_IMAGE := silkeh/clang:19
+
+CLANG_DOCKER := docker run --rm \
+								-v $$(pwd):/app \
+								-w /app \
+								$(CLANG_IMAGE) /bin/sh -c
+
 format:
-	clang-format -i -style=Google *.cpp *.hpp
+	$(CLANG_DOCKER) \
+	"clang-format -i -style=Google --verbose *.cpp *.hpp"
 
 .PHONY: all clean fclean re format

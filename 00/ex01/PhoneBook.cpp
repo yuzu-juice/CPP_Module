@@ -2,11 +2,9 @@
 
 #include <iostream>
 
-PhoneBook::PhoneBook(void) : _last_index(0) {
-}
+PhoneBook::PhoneBook(void) : _last_index(0) {}
 
-PhoneBook::~PhoneBook(void) {
-}
+PhoneBook::~PhoneBook(void) {}
 
 void PhoneBook::addContact(Contact contact) {
   if (_last_index < 8) {
@@ -20,13 +18,9 @@ void PhoneBook::addContact(Contact contact) {
   }
 }
 
-Contact PhoneBook::getContact(size_t index) const {
-  return _array[index];
-}
+Contact PhoneBook::getContact(size_t index) const { return _array[index]; }
 
-const Contact (&PhoneBook::getAllContacts() const)[8] {
-  return (_array);
-}
+const Contact (&PhoneBook::getAllContacts() const)[8] { return (_array); }
 
 void PhoneBook::displayContact(Contact contact) const {
   std::cout << "first name: " + contact.getFirstName() << std::endl;
@@ -54,9 +48,7 @@ void PhoneBook::displayAllContacts(const Contact allContacts[8]) const {
   std::cout << std::endl;
 }
 
-size_t PhoneBook::getPhoneBookSize() const {
-  return (_last_index);
-}
+size_t PhoneBook::getPhoneBookSize() const { return (_last_index); }
 
 std::string PhoneBook::format(std::string str) const {
   std::string ret;

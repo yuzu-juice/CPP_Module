@@ -17,7 +17,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          style: 'file'
+          style: 'Google'
           tidy-checks: ''
           files-changed-only: false
           thread-comments: false

@@ -24,6 +24,17 @@ fclean: clean
 
 re: fclean all
 
+CLANG_IMAGE := silkeh/clang:19
+
+CLANG_DOCKER := docker run --rm \
+								-v $$(pwd):/app \
+								-w /app \
+								$(CLANG_IMAGE) /bin/sh -c
+
+format:
+	$(CLANG_DOCKER) \
+	"clang-format -i -style=Google --verbose *.cpp *.hpp"
+
 test:
 	cmake -S ../.. -B ../../build
 	cmake --build ../../build
