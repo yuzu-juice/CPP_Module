@@ -1,25 +1,32 @@
 #include <exception>
 
-#include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main() {
   Bureaucrat b = Bureaucrat("Alice");
-  AForm f = AForm("AForm1", 150, 150);
-
+  ShruberryCreationForm s = ShruberryCreationForm("ShruberryCreationForm", "Target");
+	
   std::cout << b << std::endl;
-  std::cout << f << std::endl;
+  std::cout << s << std::endl;
 
-  b.signForm(f);  // Success
+  b.signForm(s); // Error
 
   std::cout << "-------------------------------" << std::endl;
 
-  AForm g = AForm("AForm2", 100, 100);
+  while (b.getGrade() > 145)
+    b.incrementGrade();
 
-  std::cout << b << std::endl;
-  std::cout << g << std::endl;
+	std::cout << b << std::endl;
 
-  b.signForm(g);  // Error
+	b.signForm(s); // Success
+  
+  std::cout << "-------------------------------" << std::endl;
 
+	// TODO; add execute command test
+  
   return 0;
 }
