@@ -31,3 +31,7 @@ ShruberryCreationForm &ShruberryCreationForm::operator=(
 ShruberryCreationForm::~ShruberryCreationForm() {
   std::cout << "[ShruberryCreationForm destructor]" << std::endl;
 }
+
+void ShruberryCreationForm::execute(const Bureaucrat &executor) {
+  executor.executeForm(*this);
+}

@@ -13,6 +13,8 @@ class ShruberryCreationForm : public AForm {
   ShruberryCreationForm(const ShruberryCreationForm &);
   ShruberryCreationForm &operator=(const ShruberryCreationForm &);
   ~ShruberryCreationForm();
+
+  void execute(const Bureaucrat &);
 };
 
 #endif

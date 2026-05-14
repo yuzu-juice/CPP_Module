@@ -60,7 +60,7 @@ int AForm::getRequiredGradeToExecute() const {
   return _required_grade_to_execute;
 }
 
-void AForm::beSigned(Bureaucrat &b) {
+void AForm::beSigned(const Bureaucrat &b) {
   if (b.getGrade() > _required_grade_to_sign) throw GradeTooLowException();
   _is_signed = true;
 }
