@@ -26,7 +26,19 @@ int main() {
 
   std::cout << "-------------------------------" << std::endl;
 
-  // TODO; add execute command test
+  std::cout << b << std::endl;
+
+  b.executeForm(s);  // Error
+
+  std::cout << "-------------------------------" << std::endl;
+
+  while (b.getGrade() > 137) b.incrementGrade();
+
+  std::cout << b << std::endl;
+
+  b.executeForm(s);  // Success
+
+  std::cout << "-------------------------------" << std::endl;
 
   return 0;
 }

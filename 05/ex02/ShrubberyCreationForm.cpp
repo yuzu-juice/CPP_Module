@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "Bureaucrat.hpp"
+
 ShruberryCreationForm::ShruberryCreationForm()
     : AForm("John Doe", 145, 137), _target("default") {
   std::cout << "[ShruberryCreationForm constructor]" << std::endl;
@@ -33,5 +35,8 @@ ShruberryCreationForm::~ShruberryCreationForm() {
 }
 
 void ShruberryCreationForm::execute(const Bureaucrat &executor) {
-  executor.executeForm(*this);
+  if (executor.getGrade() > _required_grade_to_execute)
+    throw GradeTooLowException();
+  // Creates a file "<target>_shrubbery" in the working dir and writes ASCII
+  // trees inside it.
 }
