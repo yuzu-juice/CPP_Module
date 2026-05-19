@@ -40,5 +40,7 @@ int main() {
 
   std::cout << "-------------------------------" << std::endl;
 
+  RobotomyRequestForm r = RobotomyRequestForm("RobotomyRequestForm", "Hello");
+
   return 0;
 }

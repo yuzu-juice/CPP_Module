@@ -2,6 +2,7 @@
 #define SHRUBERRY_CREATION_FORM_
 
 #include "AForm.hpp"
+#include "Bureaucrat.hpp"
 
 class ShruberryCreationForm : public AForm {
  private:
