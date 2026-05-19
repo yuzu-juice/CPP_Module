@@ -9,7 +9,7 @@
 int main() {
   Bureaucrat b = Bureaucrat("Alice");
   ShruberryCreationForm s =
-      ShruberryCreationForm("ShruberryCreationForm", "Target");
+      ShruberryCreationForm("ShruberryCreationForm", "Hello");
 
   std::cout << b << std::endl;
   std::cout << s << std::endl;
