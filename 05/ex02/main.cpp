@@ -42,5 +42,32 @@ int main() {
 
   RobotomyRequestForm r = RobotomyRequestForm("RobotomyRequestForm", "Hello");
 
+  std::cout << b << std::endl;
+
+  b.signForm(r);  // Error
+
+  std::cout << "-------------------------------" << std::endl;
+
+  while (b.getGrade() > 72) b.incrementGrade();
+
+  std::cout << b << std::endl;
+
+  b.signForm(r);  // Success
+
+  std::cout << "-------------------------------" << std::endl;
+
+  std::cout << b << std::endl;
+
+  b.executeForm(r);  // Error
+
+  std::cout << "-------------------------------" << std::endl;
+
+  while (b.getGrade() > 45) b.incrementGrade();
+
+  std::cout << b << std::endl;
+
+  b.executeForm(r);  // Success
+
+  std::cout << "-------------------------------" << std::endl;
   return 0;
 }
