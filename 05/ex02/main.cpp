@@ -69,5 +69,37 @@ int main() {
   b.executeForm(r);  // Success
 
   std::cout << "-------------------------------" << std::endl;
+
+  PresidentialPardonForm p =
+      PresidentialPardonForm("PresidentialPardonForm", "Hello");
+
+  std::cout << b << std::endl;
+
+  b.signForm(p);  // Error
+
+  std::cout << "-------------------------------" << std::endl;
+
+  while (b.getGrade() > 25) b.incrementGrade();
+
+  std::cout << b << std::endl;
+
+  b.signForm(p);  // Success
+
+  std::cout << "-------------------------------" << std::endl;
+
+  std::cout << b << std::endl;
+
+  b.executeForm(p);  // Error
+
+  std::cout << "-------------------------------" << std::endl;
+
+  while (b.getGrade() > 5) b.incrementGrade();
+
+  std::cout << b << std::endl;
+
+  b.executeForm(p);  // Success
+
+  std::cout << "-------------------------------" << std::endl;
+
   return 0;
 }
