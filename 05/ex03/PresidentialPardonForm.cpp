@@ -9,10 +9,16 @@ PresidentialPardonForm::PresidentialPardonForm()
   std::cout << "[PresidentialPardonForm constructor]" << std::endl;
 }
 
+PresidentialPardonForm::PresidentialPardonForm(const std::string &name)
+    : AForm(name, 25, 5), _target("default") {
+  std::cout << "[PresidentialPardonForm constructor with the name]"
+            << std::endl;
+}
+
 PresidentialPardonForm::PresidentialPardonForm(const std::string &name,
                                                const std::string &target)
     : AForm(name, 25, 5), _target(target) {
-  std::cout << "[PresidentialPardonForm constructor with the name]"
+  std::cout << "[PresidentialPardonForm constructor with name and target]"
             << std::endl;
 }
 

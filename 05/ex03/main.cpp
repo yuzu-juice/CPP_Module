@@ -2,6 +2,7 @@
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "Intern.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
@@ -101,5 +102,11 @@ int main() {
 
   std::cout << "-------------------------------" << std::endl;
 
+  Intern i;
+  AForm *a = i.makeForm("ShruberryCreationForm", "target");
+
+  b.executeForm(*a);
+
+  delete a;
   return 0;
 }

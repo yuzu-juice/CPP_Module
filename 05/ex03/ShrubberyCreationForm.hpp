@@ -10,6 +10,7 @@ class ShruberryCreationForm : public AForm {
 
  public:
   ShruberryCreationForm();
+  ShruberryCreationForm(const std::string &);
   ShruberryCreationForm(const std::string &, const std::string &);
   ShruberryCreationForm(const ShruberryCreationForm &);
   ShruberryCreationForm &operator=(const ShruberryCreationForm &);

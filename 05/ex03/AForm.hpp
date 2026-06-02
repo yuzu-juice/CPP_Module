@@ -15,7 +15,8 @@ class AForm {
 
  public:
   AForm();
-  AForm(const std::string name, const int grade_to_sign,
+  AForm(const std::string &name);
+  AForm(const std::string &name, const int grade_to_sign,
         const int grade_to_execute);
   AForm(const AForm &);
   AForm &operator=(const AForm &);

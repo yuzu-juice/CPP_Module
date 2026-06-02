@@ -13,7 +13,15 @@ AForm::AForm()
   std::cout << "[Constructor form]" << std::endl;
 }
 
-AForm::AForm(const std::string name, const int grade_to_sign,
+AForm::AForm(const std::string &name)
+    : _name(name),
+      _is_signed(false),
+      _required_grade_to_sign(150),
+      _required_grade_to_execute(150) {
+  std::cout << "[Constructor form with the name]" << std::endl;
+}
+
+AForm::AForm(const std::string &name, const int grade_to_sign,
              const int grade_to_execute)
     : _name(name),
       _is_signed(false),

@@ -11,10 +11,16 @@ ShruberryCreationForm::ShruberryCreationForm()
   std::cout << "[ShruberryCreationForm constructor]" << std::endl;
 }
 
+ShruberryCreationForm::ShruberryCreationForm(const std::string &name)
+    : AForm(name, 145, 137), _target("default") {
+  std::cout << "[ShruberryCreationForm constructor with the name]" << std::endl;
+}
+
 ShruberryCreationForm::ShruberryCreationForm(const std::string &name,
                                              const std::string &target)
     : AForm(name, 145, 137), _target(target) {
-  std::cout << "[ShruberryCreationForm constructor with the name]" << std::endl;
+  std::cout << "[ShruberryCreationForm constructor name and target]"
+            << std::endl;
 }
 
 ShruberryCreationForm::ShruberryCreationForm(const ShruberryCreationForm &other)

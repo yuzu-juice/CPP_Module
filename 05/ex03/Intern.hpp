@@ -3,13 +3,15 @@
 
 #include <iostream>
 
+#include "AForm.hpp"
+
 class Intern {
-public:
+ public:
   Intern();
   Intern(const Intern &);
-	Intern &operator=(const Intern&);
-	~Intern();
-  void makeForm(std::string &, std::string &);
+  Intern &operator=(const Intern &);
+  ~Intern();
+  AForm *makeForm(const std::string &, const std::string &);
 };
 
 #endif

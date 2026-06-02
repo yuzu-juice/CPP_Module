@@ -10,10 +10,16 @@ RobotomyRequestForm::RobotomyRequestForm()
   std::cout << "[RobotomyRequestForm constructor]" << std::endl;
 }
 
+RobotomyRequestForm::RobotomyRequestForm(const std::string &name)
+    : AForm(name, 72, 45), _target("default") {
+  std::cout << "[RobotomyRequestForm constructor with the name]" << std::endl;
+}
+
 RobotomyRequestForm::RobotomyRequestForm(const std::string &name,
                                          const std::string &target)
     : AForm(name, 72, 45), _target(target) {
-  std::cout << "[RobotomyRequestForm constructor with the name]" << std::endl;
+  std::cout << "[RobotomyRequestForm constructor with name and target]"
+            << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
