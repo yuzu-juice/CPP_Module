@@ -28,14 +28,14 @@ Intern::~Intern() { std::cout << "[Destructor intern]" << std::endl; }
 AForm *Intern::makeForm(const std::string &form_name,
                         const std::string &target_name) {
   AForm *a;
-  if (form_name == "PresidentialPardonForm")
+  if (form_name == "presidential pardon")
     a = new PresidentialPardonForm(target_name);
-  else if (form_name == "RobotomyRequestForm")
+  else if (form_name == "robotomy request")
     a = new RobotomyRequestForm(target_name);
-  else if (form_name == "ShruberryCreationForm")
+  else if (form_name == "shruberry creation")
     a = new ShruberryCreationForm(target_name);
   else {
-    std::cout << "Intern creates nothing(NULL)" << std::endl;
+    std::cout << "Intern creates nothing" << std::endl;
     return NULL;
   }
   std::cout << "Intern creates " << form_name << std::endl;
