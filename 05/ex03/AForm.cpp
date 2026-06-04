@@ -27,7 +27,7 @@ AForm::AForm(const std::string &name, const int grade_to_sign,
       _is_signed(false),
       _required_grade_to_sign(grade_to_sign),
       _required_grade_to_execute(grade_to_execute) {
-  std::cout << "[Constructor form with the name and grades to sign and execute]"
+  std::cout << "[Constructor form with name and grades to operate]"
             << std::endl;
 }
 
