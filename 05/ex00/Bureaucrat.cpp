@@ -3,27 +3,29 @@
 #include <ostream>
 
 Bureaucrat::Bureaucrat() : _name("John Doe"), _grade(150) {
-  std::cout << "[Constructor]" << std::endl;
+  std::cout << "[Constructor bureaucrat]" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string &s) : _name(s), _grade(150) {
-  std::cout << "[Constructor with the name]" << std::endl;
+  std::cout << "[Constructor bureaucrat with the name]" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other)
     : _name(other._name), _grade(other._grade) {
-  std::cout << "[Copy constructor]" << std::endl;
+  std::cout << "[Copy constructor bureaucrat]" << std::endl;
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
-  std::cout << "[Assignment operator overload]" << std::endl;
+  std::cout << "[Assignment operator overload bureaucart]" << std::endl;
   if (this != &other) {
     _grade = other._grade;
   }
   return *this;
 }
 
-Bureaucrat::~Bureaucrat() { std::cout << "[Destructor]" << std::endl; }
+Bureaucrat::~Bureaucrat() {
+  std::cout << "[Destructor bureaucrat]" << std::endl;
+}
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &breaucrat) {
   os << breaucrat.getName() << ", breaucrat grade " << breaucrat.getGrade();
