@@ -8,105 +8,17 @@
 #include "ShrubberyCreationForm.hpp"
 
 int main() {
-  Bureaucrat b = Bureaucrat("Alice");
-  ShruberryCreationForm s =
-      ShruberryCreationForm("ShruberryCreationForm", "Hello");
+  Intern someRandomIntern;
+  AForm *shruberry, *robotomy, *presidential;
 
-  std::cout << b << std::endl;
-  std::cout << s << std::endl;
+  shruberry = someRandomIntern.makeForm("shruberry creation", "target");
+  robotomy = someRandomIntern.makeForm("rotobomy creation", "target");
+  presidential = someRandomIntern.makeForm("presidential pardon", "target");
 
-  b.signForm(s);  // Error
+  // TODO: Print form detail
 
-  std::cout << "-------------------------------" << std::endl;
-
-  while (b.getGrade() > 145) b.incrementGrade();
-
-  std::cout << b << std::endl;
-
-  b.signForm(s);  // Success
-
-  std::cout << "-------------------------------" << std::endl;
-
-  std::cout << b << std::endl;
-
-  b.executeForm(s);  // Error
-
-  std::cout << "-------------------------------" << std::endl;
-
-  while (b.getGrade() > 137) b.incrementGrade();
-
-  std::cout << b << std::endl;
-
-  b.executeForm(s);  // Success
-
-  std::cout << "-------------------------------" << std::endl;
-
-  RobotomyRequestForm r = RobotomyRequestForm("RobotomyRequestForm", "Hello");
-
-  std::cout << b << std::endl;
-
-  b.signForm(r);  // Error
-
-  std::cout << "-------------------------------" << std::endl;
-
-  while (b.getGrade() > 72) b.incrementGrade();
-
-  std::cout << b << std::endl;
-
-  b.signForm(r);  // Success
-
-  std::cout << "-------------------------------" << std::endl;
-
-  std::cout << b << std::endl;
-
-  b.executeForm(r);  // Error
-
-  std::cout << "-------------------------------" << std::endl;
-
-  while (b.getGrade() > 45) b.incrementGrade();
-
-  std::cout << b << std::endl;
-
-  b.executeForm(r);  // Success
-
-  std::cout << "-------------------------------" << std::endl;
-
-  PresidentialPardonForm p =
-      PresidentialPardonForm("PresidentialPardonForm", "Hello");
-
-  std::cout << b << std::endl;
-
-  b.signForm(p);  // Error
-
-  std::cout << "-------------------------------" << std::endl;
-
-  while (b.getGrade() > 25) b.incrementGrade();
-
-  std::cout << b << std::endl;
-
-  b.signForm(p);  // Success
-
-  std::cout << "-------------------------------" << std::endl;
-
-  std::cout << b << std::endl;
-
-  b.executeForm(p);  // Error
-
-  std::cout << "-------------------------------" << std::endl;
-
-  while (b.getGrade() > 5) b.incrementGrade();
-
-  std::cout << b << std::endl;
-
-  b.executeForm(p);  // Success
-
-  std::cout << "-------------------------------" << std::endl;
-
-  Intern i;
-  AForm *a = i.makeForm("ShruberryCreationForm", "target");
-
-  b.executeForm(*a);
-
-  delete a;
+  delete shruberry;
+  delete robotomy;
+  delete presidential;
   return 0;
 }
