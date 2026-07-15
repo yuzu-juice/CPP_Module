@@ -42,7 +42,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
   std::cout << "[ShrubberyCreationForm destructor]" << std::endl;
 }
 
-void ShrubberyCreationForm::execute(const Bureaucrat &executor) {
+void ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
   if (executor.getGrade() > _required_grade_to_execute)
     throw GradeTooLowException();
 

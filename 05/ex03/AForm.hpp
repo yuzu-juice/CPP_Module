@@ -37,7 +37,7 @@ class AForm {
   int getRequiredGradeToSign() const;
   int getRequiredGradeToExecute() const;
   void beSigned(const Bureaucrat &);
-  virtual void execute(const Bureaucrat &) = 0;
+  virtual void execute(const Bureaucrat &) const = 0;
 };
 
 std::ostream &operator<<(std::ostream &, const AForm &);
