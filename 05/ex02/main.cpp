@@ -8,8 +8,8 @@
 
 int main() {
   Bureaucrat b = Bureaucrat("Alice");
-  ShruberryCreationForm s =
-      ShruberryCreationForm("ShruberryCreationForm", "Hello");
+  ShrubberyCreationForm s =
+      ShrubberyCreationForm("ShrubberyCreationForm", "Hello");
 
   std::cout << b << std::endl;
   std::cout << s << std::endl;

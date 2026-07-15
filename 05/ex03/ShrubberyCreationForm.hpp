@@ -1,20 +1,20 @@
-#ifndef SHRUBERRY_CREATION_FORM_
-#define SHRUBERRY_CREATION_FORM_
+#ifndef SHRUBBERY_CREATION_FORM_
+#define SHRUBBERY_CREATION_FORM_
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-class ShruberryCreationForm : public AForm {
+class ShrubberyCreationForm : public AForm {
  private:
   const std::string _target;
 
  public:
-  ShruberryCreationForm();
-  ShruberryCreationForm(const std::string &);
-  ShruberryCreationForm(const std::string &, const std::string &);
-  ShruberryCreationForm(const ShruberryCreationForm &);
-  ShruberryCreationForm &operator=(const ShruberryCreationForm &);
-  ~ShruberryCreationForm();
+  ShrubberyCreationForm();
+  ShrubberyCreationForm(const std::string &);
+  ShrubberyCreationForm(const std::string &, const std::string &);
+  ShrubberyCreationForm(const ShrubberyCreationForm &);
+  ShrubberyCreationForm &operator=(const ShrubberyCreationForm &);
+  ~ShrubberyCreationForm();
 
   void execute(const Bureaucrat &);
 };
