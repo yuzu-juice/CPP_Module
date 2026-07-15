@@ -3,17 +3,17 @@ SRCS	= main.cpp Bureaucrat.cpp
 
 OBJS	= $(SRCS:.cpp=.o)
 
-CC	= c++
-CFLAGS	= -Wall -Werror -Wextra -std=c++98 -pedantic
+CXX	= c++
+CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -pedantic
 
 .DEFAULT:	all
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
