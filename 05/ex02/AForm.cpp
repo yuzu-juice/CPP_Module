@@ -30,7 +30,7 @@ AForm::AForm(const AForm &other)
   std::cout << "[Copy constructor form]" << std::endl;
 }
 
-AForm &AForm::AForm::operator=(const AForm &other) {
+AForm &AForm::operator=(const AForm &other) {
   std::cout << "[Assignment operator overload form]" << std::endl;
   if (this != &other) {
     _is_signed = other._is_signed;
@@ -50,6 +50,10 @@ const char *AForm::GradeTooLowException::what() const throw() {
   return ("Grade too low.");
 }
 
+const char *AForm::FormNotSignedException::what() const throw() {
+  return ("Form is not signed.");
+}
+
 std::string AForm::getName() const { return _name; }
 
 bool AForm::getIsSigned() const { return _is_signed; }
@@ -63,6 +67,12 @@ int AForm::getRequiredGradeToExecute() const {
 void AForm::beSigned(const Bureaucrat &b) {
   if (b.getGrade() > _required_grade_to_sign) throw GradeTooLowException();
   _is_signed = true;
+}
+
+void AForm::checkExecutable(const Bureaucrat &executor) const {
+  if (!_is_signed) throw FormNotSignedException();
+  if (executor.getGrade() > _required_grade_to_execute)
+    throw GradeTooLowException();
 }
 
 std::ostream &operator<<(std::ostream &os, const AForm &f) {

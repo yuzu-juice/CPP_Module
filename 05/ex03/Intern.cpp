@@ -30,7 +30,7 @@ Intern::Intern(const Intern &other) {
   std::cout << "[Copy constructor Intern]" << std::endl;
 }
 
-Intern &Intern::Intern::operator=(const Intern &other) {
+Intern &Intern::operator=(const Intern &other) {
   std::cout << "[Assignment operator overload intern]" << std::endl;
   if (this != &other) {
     // _required_grade_to_sign and _required_grade_to_execute must be constant,
