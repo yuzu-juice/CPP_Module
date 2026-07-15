@@ -27,7 +27,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(
   std::cout << "[ShrubberyCreationForm assignment operator overload]"
             << std::endl;
   if (this != &other) {
-    // It can't copy anything because all attributes are constant.
+    AForm::operator=(other);
   }
   return *this;
 }

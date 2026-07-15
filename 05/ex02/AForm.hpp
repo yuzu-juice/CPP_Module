@@ -7,11 +7,13 @@
 class Bureaucrat;
 
 class AForm {
- protected:
+ private:
   const std::string _name;
   bool _is_signed;
   const int _required_grade_to_sign;
   const int _required_grade_to_execute;
+
+ protected:
   void checkExecutable(const Bureaucrat &) const;
 
  public:
