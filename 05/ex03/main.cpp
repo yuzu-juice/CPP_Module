@@ -9,19 +9,19 @@
 
 int main() {
   Intern someRandomIntern;
-  AForm *shruberry, *robotomy, *presidential, *other;
+  AForm *shrubbery, *robotomy, *presidential, *other;
 
-  shruberry = someRandomIntern.makeForm("shruberry creation", "target");
+  shrubbery = someRandomIntern.makeForm("shrubbery creation", "target");
   robotomy = someRandomIntern.makeForm("robotomy request", "target");
   presidential = someRandomIntern.makeForm("presidential pardon", "target");
   other = someRandomIntern.makeForm("other form", "target");
 
-  std::cout << *shruberry << std::endl;
+  std::cout << *shrubbery << std::endl;
   std::cout << *robotomy << std::endl;
   std::cout << *presidential << std::endl;
   std::cout << other << std::endl;
 
-  delete shruberry;
+  delete shrubbery;
   delete robotomy;
   delete presidential;
   return 0;

@@ -16,7 +16,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other)
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
-  std::cout << "[Assignment operator overload bureaucart]" << std::endl;
+  std::cout << "[Assignment operator overload bureaucrat]" << std::endl;
   if (this != &other) {
     _grade = other._grade;
   }
@@ -27,8 +27,8 @@ Bureaucrat::~Bureaucrat() {
   std::cout << "[Destructor bureaucrat]" << std::endl;
 }
 
-std::ostream &operator<<(std::ostream &os, const Bureaucrat &breaucrat) {
-  os << breaucrat.getName() << ", breaucrat grade " << breaucrat.getGrade();
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
+  os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
   return os;
 }
 

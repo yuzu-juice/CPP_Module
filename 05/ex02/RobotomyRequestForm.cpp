@@ -6,7 +6,7 @@
 #include "Bureaucrat.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm()
-    : AForm("Jone Doe", 72, 45), _target("default") {
+    : AForm("John Doe", 72, 45), _target("default") {
   std::cout << "[RobotomyRequestForm constructor]" << std::endl;
 }
 

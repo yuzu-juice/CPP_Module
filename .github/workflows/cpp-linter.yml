@@ -18,8 +18,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           style: 'Google'
+          version: '19'
           tidy-checks: ''
-          files-changed-only: false
+          files-changed-only: true
           thread-comments: false
           extra-args: '-Wall -Werror -Wextra -std=c++98'
           ignore: '*.test.cpp'

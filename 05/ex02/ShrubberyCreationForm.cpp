@@ -6,25 +6,25 @@
 
 #include "Bureaucrat.hpp"
 
-ShruberryCreationForm::ShruberryCreationForm()
+ShrubberyCreationForm::ShrubberyCreationForm()
     : AForm("John Doe", 145, 137), _target("default") {
-  std::cout << "[ShruberryCreationForm constructor]" << std::endl;
+  std::cout << "[ShrubberyCreationForm constructor]" << std::endl;
 }
 
-ShruberryCreationForm::ShruberryCreationForm(const std::string &name,
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &name,
                                              const std::string &target)
     : AForm(name, 145, 137), _target(target) {
-  std::cout << "[ShruberryCreationForm constructor with the name]" << std::endl;
+  std::cout << "[ShrubberyCreationForm constructor with the name]" << std::endl;
 }
 
-ShruberryCreationForm::ShruberryCreationForm(const ShruberryCreationForm &other)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
     : AForm(other), _target(other._target) {
-  std::cout << "[ShruberryCreationForm copy constructor]" << std::endl;
+  std::cout << "[ShrubberyCreationForm copy constructor]" << std::endl;
 }
 
-ShruberryCreationForm &ShruberryCreationForm::operator=(
-    const ShruberryCreationForm &other) {
-  std::cout << "[ShruberryCreationForm assignment operator overload]"
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(
+    const ShrubberyCreationForm &other) {
+  std::cout << "[ShrubberyCreationForm assignment operator overload]"
             << std::endl;
   if (this != &other) {
     // It can't copy anything because all attributes are constant.
@@ -32,11 +32,11 @@ ShruberryCreationForm &ShruberryCreationForm::operator=(
   return *this;
 }
 
-ShruberryCreationForm::~ShruberryCreationForm() {
-  std::cout << "[ShruberryCreationForm destructor]" << std::endl;
+ShrubberyCreationForm::~ShrubberyCreationForm() {
+  std::cout << "[ShrubberyCreationForm destructor]" << std::endl;
 }
 
-void ShruberryCreationForm::execute(const Bureaucrat &executor) {
+void ShrubberyCreationForm::execute(const Bureaucrat &executor) {
   if (executor.getGrade() > _required_grade_to_execute)
     throw GradeTooLowException();
 

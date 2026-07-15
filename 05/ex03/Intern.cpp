@@ -32,8 +32,8 @@ AForm *Intern::makeForm(const std::string &form_name,
     a = new PresidentialPardonForm(target_name);
   else if (form_name == "robotomy request")
     a = new RobotomyRequestForm(target_name);
-  else if (form_name == "shruberry creation")
-    a = new ShruberryCreationForm(target_name);
+  else if (form_name == "shrubbery creation")
+    a = new ShrubberyCreationForm(target_name);
   else {
     std::cout << "Intern creates nothing" << std::endl;
     return NULL;
