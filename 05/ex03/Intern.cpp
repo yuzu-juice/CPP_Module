@@ -7,6 +7,22 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
+namespace {
+
+AForm *createPresidentialPardonForm(const std::string &target) {
+  return new PresidentialPardonForm(target);
+}
+
+AForm *createRobotomyRequestForm(const std::string &target) {
+  return new RobotomyRequestForm(target);
+}
+
+AForm *createShrubberyCreationForm(const std::string &target) {
+  return new ShrubberyCreationForm(target);
+}
+
+}  // namespace
+
 Intern::Intern() { std::cout << "[Constructor intern]" << std::endl; }
 
 Intern::Intern(const Intern &other) {
@@ -27,17 +43,18 @@ Intern::~Intern() { std::cout << "[Destructor intern]" << std::endl; }
 
 AForm *Intern::makeForm(const std::string &form_name,
                         const std::string &target_name) {
-  AForm *a;
-  if (form_name == "presidential pardon")
-    a = new PresidentialPardonForm(target_name);
-  else if (form_name == "robotomy request")
-    a = new RobotomyRequestForm(target_name);
-  else if (form_name == "shrubbery creation")
-    a = new ShrubberyCreationForm(target_name);
-  else {
-    std::cout << "Intern creates nothing" << std::endl;
-    return NULL;
+  const std::string form_names[3] = {"presidential pardon", "robotomy request",
+                                     "shrubbery creation"};
+  AForm *(*const form_creators[3])(const std::string &) = {
+      &createPresidentialPardonForm, &createRobotomyRequestForm,
+      &createShrubberyCreationForm};
+
+  for (int i = 0; i < 3; ++i) {
+    if (form_name == form_names[i]) {
+      std::cout << "Intern creates " << form_name << std::endl;
+      return form_creators[i](target_name);
+    }
   }
-  std::cout << "Intern creates " << form_name << std::endl;
-  return a;
+  std::cout << "Intern creates nothing" << std::endl;
+  return NULL;
 }

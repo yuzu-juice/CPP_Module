@@ -35,7 +35,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {
   std::cout << "[RobotomyRequestForm destructor]" << std::endl;
 }
 
-void RobotomyRequestForm::execute(const Bureaucrat &executor) {
+void RobotomyRequestForm::execute(const Bureaucrat &executor) const {
   if (executor.getGrade() > _required_grade_to_execute)
     throw GradeTooLowException();
   std::srand(time(NULL));

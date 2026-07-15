@@ -36,7 +36,7 @@ PresidentialPardonForm::~PresidentialPardonForm() {
   std::cout << "[PresidentialPardonForm destructor]" << std::endl;
 }
 
-void PresidentialPardonForm::execute(const Bureaucrat &executor) {
+void PresidentialPardonForm::execute(const Bureaucrat &executor) const {
   if (executor.getGrade() > _required_grade_to_execute)
     throw GradeTooLowException();
   std::cout << _target << " has been pardoned by Zaphod Beeblebrox."
