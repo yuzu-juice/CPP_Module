@@ -12,6 +12,7 @@ class AForm {
   bool _is_signed;
   const int _required_grade_to_sign;
   const int _required_grade_to_execute;
+  void checkExecutable(const Bureaucrat &) const;
 
  public:
   AForm();
@@ -27,6 +28,11 @@ class AForm {
   };
 
   class GradeTooLowException : public std::exception {
+   public:
+    virtual const char *what() const throw();
+  };
+
+  class FormNotSignedException : public std::exception {
    public:
     virtual const char *what() const throw();
   };

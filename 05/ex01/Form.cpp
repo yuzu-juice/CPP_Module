@@ -30,7 +30,7 @@ Form::Form(const Form &other)
   std::cout << "[Copy constructor form]" << std::endl;
 }
 
-Form &Form::Form::operator=(const Form &other) {
+Form &Form::operator=(const Form &other) {
   std::cout << "[Assignment operator overload form]" << std::endl;
   if (this != &other) {
     _is_signed = other._is_signed;

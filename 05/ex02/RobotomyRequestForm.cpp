@@ -10,10 +10,9 @@ RobotomyRequestForm::RobotomyRequestForm()
   std::cout << "[RobotomyRequestForm constructor]" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &name,
-                                         const std::string &target)
-    : AForm(name, 72, 45), _target(target) {
-  std::cout << "[RobotomyRequestForm constructor with the name]" << std::endl;
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
+    : AForm("RobotomyRequestForm", 72, 45), _target(target) {
+  std::cout << "[RobotomyRequestForm constructor with the target]" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
@@ -36,8 +35,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 }
 
 void RobotomyRequestForm::execute(const Bureaucrat &executor) const {
-  if (executor.getGrade() > _required_grade_to_execute)
-    throw GradeTooLowException();
+  checkExecutable(executor);
   std::srand(time(NULL));
   if (std::rand() % 2 == 0)
     std::cout << _target << " has been robotomized." << std::endl;

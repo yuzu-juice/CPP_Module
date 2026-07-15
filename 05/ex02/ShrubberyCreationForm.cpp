@@ -11,10 +11,10 @@ ShrubberyCreationForm::ShrubberyCreationForm()
   std::cout << "[ShrubberyCreationForm constructor]" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &name,
-                                             const std::string &target)
-    : AForm(name, 145, 137), _target(target) {
-  std::cout << "[ShrubberyCreationForm constructor with the name]" << std::endl;
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
+    : AForm("ShrubberyCreationForm", 145, 137), _target(target) {
+  std::cout << "[ShrubberyCreationForm constructor with the target]"
+            << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
@@ -37,8 +37,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 }
 
 void ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
-  if (executor.getGrade() > _required_grade_to_execute)
-    throw GradeTooLowException();
+  checkExecutable(executor);
 
   try {
     std::ofstream outfile((_target + "_shrubbery").c_str());

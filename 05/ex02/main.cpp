@@ -8,8 +8,7 @@
 
 int main() {
   Bureaucrat b = Bureaucrat("Alice");
-  ShrubberyCreationForm s =
-      ShrubberyCreationForm("ShrubberyCreationForm", "Hello");
+  ShrubberyCreationForm s = ShrubberyCreationForm("Hello");
 
   std::cout << b << std::endl;
   std::cout << s << std::endl;
@@ -40,7 +39,7 @@ int main() {
 
   std::cout << "-------------------------------" << std::endl;
 
-  RobotomyRequestForm r = RobotomyRequestForm("RobotomyRequestForm", "Hello");
+  RobotomyRequestForm r = RobotomyRequestForm("Hello");
 
   std::cout << b << std::endl;
 
@@ -70,8 +69,7 @@ int main() {
 
   std::cout << "-------------------------------" << std::endl;
 
-  PresidentialPardonForm p =
-      PresidentialPardonForm("PresidentialPardonForm", "Hello");
+  PresidentialPardonForm p = PresidentialPardonForm("Hello");
 
   std::cout << b << std::endl;
 
