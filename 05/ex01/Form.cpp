@@ -19,12 +19,17 @@ Form::Form(const std::string name, const int grade_to_sign,
       _is_signed(false),
       _required_grade_to_sign(grade_to_sign),
       _required_grade_to_execute(grade_to_execute) {
+  if (_required_grade_to_sign < 1 || _required_grade_to_execute < 1)
+    throw GradeTooHighException();
+  if (_required_grade_to_sign > 150 || _required_grade_to_execute > 150)
+    throw GradeTooLowException();
   std::cout << "[Constructor form with name and grades to operate]"
             << std::endl;
 }
 
 Form::Form(const Form &other)
-    : _is_signed(other._is_signed),
+    : _name(other._name),
+      _is_signed(other._is_signed),
       _required_grade_to_sign(other._required_grade_to_sign),
       _required_grade_to_execute(other._required_grade_to_execute) {
   std::cout << "[Copy constructor form]" << std::endl;
