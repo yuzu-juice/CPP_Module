@@ -70,9 +70,7 @@ void printInt(double value) {
   std::cout << "int: " << static_cast<int>(value) << "\n";
 }
 
-void printFloating(const char* name, double value, const char* suffix,
-                   int precision) {
-  std::cout << name << ": ";
+void printFloatingValue(double value, int precision) {
   if (std::isnan(value))
     std::cout << "nan";
   else if (std::isinf(value))
@@ -86,12 +84,18 @@ void printFloating(const char* name, double value, const char* suffix,
         result.find_first_of(".eE") == std::string::npos)
       std::cout << ".0";
   }
-  std::cout << suffix << "\n";
 }
 
-void printFloating(const char* name, float value, const char* suffix,
-                   int precision) {
-  printFloating(name, static_cast<double>(value), suffix, precision);
+void printFloat(float value, int precision) {
+  std::cout << "float: ";
+  printFloatingValue(static_cast<double>(value), precision);
+  std::cout << "f\n";
+}
+
+void printDouble(double value, int precision) {
+  std::cout << "double: ";
+  printFloatingValue(value, precision);
+  std::cout << "\n";
 }
 
 LiteralType detectType(const std::string& literal) {
@@ -134,27 +138,27 @@ LiteralType detectType(const std::string& literal) {
 void printValues(int value) {
   printChar(value);
   std::cout << "int: " << value << "\n";
-  printFloating("float", static_cast<float>(value), "f",
-                std::numeric_limits<float>::digits10 + 1);
-  printFloating("double", static_cast<double>(value), "",
-                std::numeric_limits<double>::digits10 + 1);
+  printFloat(static_cast<float>(value),
+             std::numeric_limits<float>::digits10 + 1);
+  printDouble(static_cast<double>(value),
+              std::numeric_limits<double>::digits10 + 1);
 }
 
 void printValues(char value) {
   std::cout << "char: '" << value << "'\n";
   std::cout << "int: " << static_cast<int>(value) << "\n";
-  printFloating("float", static_cast<float>(value), "f",
-                std::numeric_limits<float>::digits10 + 1);
-  printFloating("double", static_cast<double>(value), "",
-                std::numeric_limits<double>::digits10 + 1);
+  printFloat(static_cast<float>(value),
+             std::numeric_limits<float>::digits10 + 1);
+  printDouble(static_cast<double>(value),
+              std::numeric_limits<double>::digits10 + 1);
 }
 
 void printValues(float value) {
   printChar(value);
   printInt(value);
   const int precision = std::numeric_limits<float>::digits10 + 1;
-  printFloating("float", value, "f", precision);
-  printFloating("double", static_cast<double>(value), "", precision);
+  printFloat(value, precision);
+  printDouble(static_cast<double>(value), precision);
 }
 
 void printValues(double value) {
@@ -165,9 +169,9 @@ void printValues(double value) {
        value > std::numeric_limits<float>::max()))
     std::cout << "float: impossible\n";
   else
-    printFloating("float", static_cast<float>(value), "f",
-                  std::numeric_limits<float>::digits10 + 1);
-  printFloating("double", value, "", std::numeric_limits<double>::digits10 + 1);
+    printFloat(static_cast<float>(value),
+               std::numeric_limits<float>::digits10 + 1);
+  printDouble(value, std::numeric_limits<double>::digits10 + 1);
 }
 
 }  // namespace
