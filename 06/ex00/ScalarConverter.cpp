@@ -4,38 +4,76 @@
 #include <cerrno>
 #include <cmath>
 #include <cstdlib>
+#include <iomanip>
 #include <iostream>
 #include <limits>
 #include <sstream>
 
 namespace {
 
-template <typename T>
-void printChar(T value) {
-  if (value != value || value < std::numeric_limits<char>::min() ||
-      value > std::numeric_limits<char>::max()) {
-    std::cout << "char: impossible\n";
-    return;
-  }
-  const char converted = static_cast<char>(value);
-  if (std::isprint(static_cast<unsigned char>(converted)))
-    std::cout << "char: '" << converted << "'\n";
+enum LiteralType { TYPE_CHAR, TYPE_INT, TYPE_FLOAT, TYPE_DOUBLE, TYPE_INVALID };
+
+bool isCharRange(long double value) {
+  return value == value &&
+         value >= static_cast<long double>(std::numeric_limits<char>::min()) &&
+         value <= static_cast<long double>(std::numeric_limits<char>::max());
+}
+
+bool isIntRange(long double value) {
+  return value == value &&
+         value >= static_cast<long double>(std::numeric_limits<int>::min()) &&
+         value <= static_cast<long double>(std::numeric_limits<int>::max());
+}
+
+void printCharValue(char value) {
+  if (std::isprint(static_cast<unsigned char>(value)))
+    std::cout << "char: '" << value << "'\n";
   else
     std::cout << "char: Non displayable\n";
 }
 
-template <typename T>
-void printInt(T value) {
-  if (value != value || value < std::numeric_limits<int>::min() ||
-      value > std::numeric_limits<int>::max()) {
+void printChar(int value) {
+  if (!isCharRange(value)) {
+    std::cout << "char: impossible\n";
+    return;
+  }
+  printCharValue(static_cast<char>(value));
+}
+
+void printChar(float value) {
+  if (!isCharRange(value)) {
+    std::cout << "char: impossible\n";
+    return;
+  }
+  printCharValue(static_cast<char>(value));
+}
+
+void printChar(double value) {
+  if (!isCharRange(value)) {
+    std::cout << "char: impossible\n";
+    return;
+  }
+  printCharValue(static_cast<char>(value));
+}
+
+void printInt(float value) {
+  if (!isIntRange(value)) {
     std::cout << "int: impossible\n";
     return;
   }
   std::cout << "int: " << static_cast<int>(value) << "\n";
 }
 
-template <typename T>
-void printFloating(const char* name, T value, const char* suffix) {
+void printInt(double value) {
+  if (!isIntRange(value)) {
+    std::cout << "int: impossible\n";
+    return;
+  }
+  std::cout << "int: " << static_cast<int>(value) << "\n";
+}
+
+void printFloating(const char* name, double value, const char* suffix,
+                   int precision) {
   std::cout << name << ": ";
   if (std::isnan(value))
     std::cout << "nan";
@@ -43,7 +81,7 @@ void printFloating(const char* name, T value, const char* suffix) {
     std::cout << (value < 0 ? "-inf" : "+inf");
   else {
     std::ostringstream output;
-    output << value;
+    output << std::setprecision(precision) << value;
     const std::string result = output.str();
     std::cout << result;
     if (value == std::floor(value) &&
@@ -53,10 +91,12 @@ void printFloating(const char* name, T value, const char* suffix) {
   std::cout << suffix << "\n";
 }
 
-}  // namespace
+void printFloating(const char* name, float value, const char* suffix,
+                   int precision) {
+  printFloating(name, static_cast<double>(value), suffix, precision);
+}
 
-ScalarConverter::LiteralType ScalarConverter::detectType(
-    const std::string& literal) {
+LiteralType detectType(const std::string& literal) {
   if (literal.length() == 1 &&
       !std::isdigit(static_cast<unsigned char>(literal[0])))
     return TYPE_CHAR;
@@ -93,6 +133,61 @@ ScalarConverter::LiteralType ScalarConverter::detectType(
   return TYPE_INVALID;
 }
 
+char parseChar(const std::string& literal) { return literal[0]; }
+
+int parseInt(const std::string& literal) {
+  return static_cast<int>(std::strtol(literal.c_str(), NULL, 10));
+}
+
+float parseFloat(const std::string& literal) {
+  return static_cast<float>(std::strtod(literal.c_str(), NULL));
+}
+
+double parseDouble(const std::string& literal) {
+  return std::strtod(literal.c_str(), NULL);
+}
+
+void printValues(int value) {
+  printChar(value);
+  std::cout << "int: " << value << "\n";
+  printFloating("float", static_cast<float>(value), "f",
+                std::numeric_limits<float>::digits10 + 1);
+  printFloating("double", static_cast<double>(value), "",
+                std::numeric_limits<double>::digits10 + 1);
+}
+
+void printValues(char value) {
+  std::cout << "char: '" << value << "'\n";
+  std::cout << "int: " << static_cast<int>(value) << "\n";
+  printFloating("float", static_cast<float>(value), "f",
+                std::numeric_limits<float>::digits10 + 1);
+  printFloating("double", static_cast<double>(value), "",
+                std::numeric_limits<double>::digits10 + 1);
+}
+
+void printValues(float value) {
+  printChar(value);
+  printInt(value);
+  const int precision = std::numeric_limits<float>::digits10 + 1;
+  printFloating("float", value, "f", precision);
+  printFloating("double", static_cast<double>(value), "", precision);
+}
+
+void printValues(double value) {
+  printChar(value);
+  printInt(value);
+  if (!std::isinf(value) && !std::isnan(value) &&
+      (value < -std::numeric_limits<float>::max() ||
+       value > std::numeric_limits<float>::max()))
+    std::cout << "float: impossible\n";
+  else
+    printFloating("float", static_cast<float>(value), "f",
+                  std::numeric_limits<float>::digits10 + 1);
+  printFloating("double", value, "", std::numeric_limits<double>::digits10 + 1);
+}
+
+}  // namespace
+
 void ScalarConverter::convert(const std::string& literal) {
   switch (detectType(literal)) {
     case TYPE_CHAR:
@@ -113,53 +208,4 @@ void ScalarConverter::convert(const std::string& literal) {
                    "float: impossible\n"
                    "double: impossible\n";
   }
-}
-
-char ScalarConverter::parseChar(const std::string& literal) {
-  return literal[0];
-}
-
-int ScalarConverter::parseInt(const std::string& literal) {
-  return static_cast<int>(std::strtol(literal.c_str(), NULL, 10));
-}
-
-float ScalarConverter::parseFloat(const std::string& literal) {
-  return static_cast<float>(std::strtod(literal.c_str(), NULL));
-}
-
-double ScalarConverter::parseDouble(const std::string& literal) {
-  return std::strtod(literal.c_str(), NULL);
-}
-
-void ScalarConverter::printValues(int value) {
-  printChar(value);
-  std::cout << "int: " << value << "\n";
-  printFloating("float", static_cast<float>(value), "f");
-  printFloating("double", static_cast<double>(value), "");
-}
-
-void ScalarConverter::printValues(char value) {
-  std::cout << "char: '" << value << "'\n";
-  std::cout << "int: " << static_cast<int>(value) << "\n";
-  printFloating("float", static_cast<float>(value), "f");
-  printFloating("double", static_cast<double>(value), "");
-}
-
-void ScalarConverter::printValues(float value) {
-  printChar(value);
-  printInt(value);
-  printFloating("float", value, "f");
-  printFloating("double", static_cast<double>(value), "");
-}
-
-void ScalarConverter::printValues(double value) {
-  printChar(value);
-  printInt(value);
-  if (!std::isinf(value) && !std::isnan(value) &&
-      (value < -std::numeric_limits<float>::max() ||
-       value > std::numeric_limits<float>::max()))
-    std::cout << "float: impossible\n";
-  else
-    printFloating("float", static_cast<float>(value), "f");
-  printFloating("double", value, "");
 }
