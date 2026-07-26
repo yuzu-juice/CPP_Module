@@ -14,14 +14,12 @@ namespace {
 enum LiteralType { TYPE_CHAR, TYPE_INT, TYPE_FLOAT, TYPE_DOUBLE, TYPE_INVALID };
 
 bool isCharRange(long double value) {
-  return value == value &&
-         value >= static_cast<long double>(std::numeric_limits<char>::min()) &&
+  return value >= static_cast<long double>(std::numeric_limits<char>::min()) &&
          value <= static_cast<long double>(std::numeric_limits<char>::max());
 }
 
 bool isIntRange(long double value) {
-  return value == value &&
-         value >= static_cast<long double>(std::numeric_limits<int>::min()) &&
+  return value >= static_cast<long double>(std::numeric_limits<int>::min()) &&
          value <= static_cast<long double>(std::numeric_limits<int>::max());
 }
 
@@ -133,20 +131,6 @@ LiteralType detectType(const std::string& literal) {
   return TYPE_INVALID;
 }
 
-char parseChar(const std::string& literal) { return literal[0]; }
-
-int parseInt(const std::string& literal) {
-  return static_cast<int>(std::strtol(literal.c_str(), NULL, 10));
-}
-
-float parseFloat(const std::string& literal) {
-  return static_cast<float>(std::strtod(literal.c_str(), NULL));
-}
-
-double parseDouble(const std::string& literal) {
-  return std::strtod(literal.c_str(), NULL);
-}
-
 void printValues(int value) {
   printChar(value);
   std::cout << "int: " << value << "\n";
@@ -191,16 +175,16 @@ void printValues(double value) {
 void ScalarConverter::convert(const std::string& literal) {
   switch (detectType(literal)) {
     case TYPE_CHAR:
-      printValues(parseChar(literal));
+      printValues(literal[0]);
       break;
     case TYPE_INT:
-      printValues(parseInt(literal));
+      printValues(static_cast<int>(std::strtol(literal.c_str(), NULL, 10)));
       break;
     case TYPE_FLOAT:
-      printValues(parseFloat(literal));
+      printValues(static_cast<float>(std::strtod(literal.c_str(), NULL)));
       break;
     case TYPE_DOUBLE:
-      printValues(parseDouble(literal));
+      printValues(std::strtod(literal.c_str(), NULL));
       break;
     default:
       std::cout << "char: impossible\n"
