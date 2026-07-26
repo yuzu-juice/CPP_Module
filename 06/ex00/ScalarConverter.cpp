@@ -23,6 +23,13 @@ bool isIntRange(long double value) {
          value <= static_cast<long double>(std::numeric_limits<int>::max());
 }
 
+bool isNan(double value) { return value != value; }
+
+bool isInfinity(double value) {
+  return value > std::numeric_limits<double>::max() ||
+         value < -std::numeric_limits<double>::max();
+}
+
 void printCharValue(char value) {
   if (std::isprint(static_cast<unsigned char>(value)))
     std::cout << "char: '" << value << "'\n";
@@ -71,9 +78,9 @@ void printInt(double value) {
 }
 
 void printFloatingValue(double value, int precision) {
-  if (std::isnan(value))
+  if (isNan(value))
     std::cout << "nan";
-  else if (std::isinf(value))
+  else if (isInfinity(value))
     std::cout << (value < 0 ? "-inf" : "+inf");
   else {
     std::ostringstream output;
@@ -122,7 +129,9 @@ LiteralType detectType(const std::string& literal) {
   end = NULL;
   errno = 0;
   const double decimal = std::strtod(literal.c_str(), &end);
-  if (errno == ERANGE) return TYPE_INVALID;
+  if (errno == ERANGE && (decimal == HUGE_VAL || decimal == -HUGE_VAL))
+    return TYPE_INVALID;
+  if (isNan(decimal) || isInfinity(decimal)) return TYPE_INVALID;
   if (end != literal.c_str() && *end == 'f' && *(end + 1) == '\0') {
     if (decimal < -std::numeric_limits<float>::max() ||
         decimal > std::numeric_limits<float>::max())
@@ -164,7 +173,7 @@ void printValues(float value) {
 void printValues(double value) {
   printChar(value);
   printInt(value);
-  if (!std::isinf(value) && !std::isnan(value) &&
+  if (!isInfinity(value) && !isNan(value) &&
       (value < -std::numeric_limits<float>::max() ||
        value > std::numeric_limits<float>::max()))
     std::cout << "float: impossible\n";

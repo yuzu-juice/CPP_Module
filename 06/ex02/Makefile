@@ -1,4 +1,4 @@
-NAME = indentify
+NAME = identify
 
 SRCS = main.cpp Base.cpp
 OBJS = $(SRCS:.cpp=.o)
