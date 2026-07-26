@@ -1,5 +1,5 @@
-#ifndef C_HPP
-#define C_HPP
+#ifndef C_HPP_
+#define C_HPP_
 
 #include "Base.hpp"
 
