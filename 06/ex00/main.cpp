@@ -2,47 +2,27 @@
 
 #include "ScalarConverter.hpp"
 
-static void test(const std::string& input) {
-  std::cout << "input: " << input << std::endl;
-  ScalarConverter::convert(input);
-  std::cout << std::endl;
+static void test(const std::string& literal) {
+  std::cout << "input: " << literal << "\n";
+  ScalarConverter::convert(literal);
+  std::cout << "\n";
 }
 
-int main() {
-  // Subject examples
-  test("0");
-  test("nan");
-  test("42.0f");
+int main(int argc, char** argv) {
+  if (argc == 2) {
+    ScalarConverter::convert(argv[1]);
+    return 0;
+  }
+  if (argc > 2) {
+    std::cerr << "Usage: ./convert <literal>" << std::endl;
+    return 1;
+  }
 
-  // Integer
-  test("42");
-  test("-42");
-  test("127");
-  test("128");
-
-  // Character
-  test("a");
-  test("z");
-  test("0");  // 数値の0
-
-  // Float / Double
-  test("42.5f");
-  test("42.5");
-  test("3.14f");
-  test("3.14");
-
-  // Pseudo literals
-  test("nanf");
-  test("+inf");
-  test("-inf");
-  test("+inff");
-  test("-inff");
-
-  // Invalid input
-  test("abc");
-  test("42ff");
-  test("");
-  test(".");
-
+  const char* cases[] = {"0",    "nan",  "42.0f", "42",    "-42",   "127",
+                         "128",  "a",    "z",     "42.5f", "42.5",  "3.14f",
+                         "3.14", "nanf", "+inf",  "-inf",  "+inff", "-inff",
+                         "abc",  "42ff", "",      "."};
+  for (unsigned int i = 0; i < sizeof(cases) / sizeof(cases[0]); ++i)
+    test(cases[i]);
   return 0;
 }
