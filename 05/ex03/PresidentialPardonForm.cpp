@@ -27,6 +27,7 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(
             << std::endl;
   if (this != &other) {
     AForm::operator=(other);
+    _target = other._target;
   }
   return *this;
 }
