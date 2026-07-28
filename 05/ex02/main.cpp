@@ -1,5 +1,3 @@
-#include <exception>
-
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -65,6 +63,10 @@ int main() {
 
   std::cout << b << std::endl;
 
+  b.executeForm(r);  // Success
+  b.executeForm(r);  // Success
+  b.executeForm(r);  // Success
+  b.executeForm(r);  // Success
   b.executeForm(r);  // Success
 
   std::cout << "-------------------------------" << std::endl;

@@ -1,5 +1,5 @@
-#ifndef DATA_HPP
-#define DATA_HPP
+#ifndef DATA_HPP_
+#define DATA_HPP_
 
 #include <string>
 

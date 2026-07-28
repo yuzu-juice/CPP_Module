@@ -10,6 +10,13 @@ Bureaucrat::Bureaucrat(const std::string &s) : _name(s), _grade(150) {
   std::cout << "[Constructor bureaucrat with the name]" << std::endl;
 }
 
+Bureaucrat::Bureaucrat(const std::string &s, int grade)
+    : _name(s), _grade(grade) {
+  if (_grade < 1) throw GradeTooHighException();
+  if (_grade > 150) throw GradeTooLowException();
+  std::cout << "[Constructor bureaucrat with the name and grade]" << std::endl;
+}
+
 Bureaucrat::Bureaucrat(const Bureaucrat &other)
     : _name(other._name), _grade(other._grade) {
   std::cout << "[Copy constructor bureaucrat]" << std::endl;

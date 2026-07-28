@@ -1,5 +1,5 @@
-#ifndef SERIALIZER_HPP
-#define SERIALIZER_HPP
+#ifndef SERIALIZER_HPP_
+#define SERIALIZER_HPP_
 
 #include <stdint.h>
 
