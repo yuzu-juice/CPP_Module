@@ -37,7 +37,7 @@ void printCharValue(char value) {
     std::cout << "char: Non displayable\n";
 }
 
-void printChar(int value) {
+void printChar(long double value) {
   if (!isCharRange(value)) {
     std::cout << "char: impossible\n";
     return;
@@ -45,31 +45,7 @@ void printChar(int value) {
   printCharValue(static_cast<char>(value));
 }
 
-void printChar(float value) {
-  if (!isCharRange(value)) {
-    std::cout << "char: impossible\n";
-    return;
-  }
-  printCharValue(static_cast<char>(value));
-}
-
-void printChar(double value) {
-  if (!isCharRange(value)) {
-    std::cout << "char: impossible\n";
-    return;
-  }
-  printCharValue(static_cast<char>(value));
-}
-
-void printInt(float value) {
-  if (!isIntRange(value)) {
-    std::cout << "int: impossible\n";
-    return;
-  }
-  std::cout << "int: " << static_cast<int>(value) << "\n";
-}
-
-void printInt(double value) {
+void printInt(long double value) {
   if (!isIntRange(value)) {
     std::cout << "int: impossible\n";
     return;
