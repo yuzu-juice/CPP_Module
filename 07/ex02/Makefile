@@ -2,7 +2,7 @@ NAME = array
 
 SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADERS = Array.hpp
+HEADERS = Array.hpp Array.tpp
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
