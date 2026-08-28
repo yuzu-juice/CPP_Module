@@ -1,8 +1,8 @@
-NAME = array
+NAME = RPN
 
-SRCS = main.cpp
+SRCS = main.cpp RPN.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADERS = Array.hpp Array.tpp
+HEADERS = RPN.hpp
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98

@@ -1,8 +1,8 @@
-NAME = array
+NAME = btc
 
-SRCS = main.cpp
+SRCS = main.cpp BitcoinExchange.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADERS = Array.hpp Array.tpp
+HEADERS = BitcoinExchange.hpp
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98

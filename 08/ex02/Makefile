@@ -1,8 +1,8 @@
-NAME = array
+NAME = mutantstack
 
 SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADERS = Array.hpp Array.tpp
+HEADERS = MutantStack.hpp
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98

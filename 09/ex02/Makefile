@@ -1,8 +1,8 @@
-NAME = array
+NAME = PmergeMe
 
-SRCS = main.cpp
+SRCS = main.cpp PmergeMe.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADERS = Array.hpp Array.tpp
+HEADERS = PmergeMe.hpp
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98

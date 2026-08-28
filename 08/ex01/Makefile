@@ -1,8 +1,8 @@
-NAME = array
+NAME = span
 
-SRCS = main.cpp
+SRCS = main.cpp Span.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADERS = Array.hpp Array.tpp
+HEADERS = Span.hpp
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
