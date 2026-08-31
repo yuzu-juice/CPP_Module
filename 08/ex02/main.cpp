@@ -4,33 +4,26 @@
 #include "MutantStack.hpp"
 
 int main() {
-  MutantStack<int> values;
-  values.push(5);
-  values.push(17);
-  std::cout << values.top() << std::endl;
-  values.pop();
-  std::cout << values.size() << std::endl;
-  values.push(3);
-  values.push(7);
-  values.push(0);
+  MutantStack<int> mstack;
+  mstack.push(5);
+  mstack.push(17);
+  std::cout << mstack.top() << std::endl;
+  mstack.pop();
+  std::cout << mstack.size() << std::endl;
+  mstack.push(3);
+  mstack.push(5);
+  mstack.push(737);
+  mstack.push(0);
 
-  MutantStack<int>::iterator it = values.begin();
-  std::cout << *it << std::endl;
-  *it = 6;
-  std::cout << *values.begin() << std::endl;
-
-  const MutantStack<int> copy(values);
-  int index = 0;
-  for (MutantStack<int>::const_iterator current = copy.begin();
-       current != copy.end(); ++current) {
-    std::cout << *current << std::endl;
-    ++index;
+  MutantStack<int>::iterator it = mstack.begin();
+  MutantStack<int>::iterator ite = mstack.end();
+  ++it;
+  --it;
+  while (it != ite) {
+    std::cout << *it << std::endl;
+    ++it;
   }
-  std::cout << index << std::endl;
 
-  std::stack<int> stack(values);
-  std::cout << stack.top() << std::endl;
-  std::cout << stack.size() << std::endl;
-
+  std::stack<int> s(mstack);
   return 0;
 }
