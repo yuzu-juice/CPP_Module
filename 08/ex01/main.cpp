@@ -45,14 +45,14 @@ int main() {
   for (int i = 0; i < 10000; ++i) input.push_back(i * 2);
   Span many(input.size());
   many.addNumber(input.begin(), input.end());
-  std::cout << "many shortest span: " << many.shortestSpan()
-            << " (expected 2)" << std::endl;
+  std::cout << "many shortest span: " << many.shortestSpan() << " (expected 2)"
+            << std::endl;
   std::cout << "many longest span: " << many.longestSpan()
             << " (expected 19998)" << std::endl;
 
   Span copy(many);
-  std::cout << "copy shortest span: " << copy.shortestSpan()
-            << " (expected 2)" << std::endl;
+  std::cout << "copy shortest span: " << copy.shortestSpan() << " (expected 2)"
+            << std::endl;
   std::cout << "copy longest span: " << copy.longestSpan()
             << " (expected 19998)" << std::endl;
 

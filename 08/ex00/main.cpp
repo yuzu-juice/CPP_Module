@@ -11,8 +11,8 @@ int main() {
   numbers.push_back(4);
 
   std::vector<int>::iterator found = easyfind(numbers, 4);
-  std::cout << "vector find 4: "
-            << (found == numbers.begin() ? "OK" : "NG") << std::endl;
+  std::cout << "vector find 4: " << (found == numbers.begin() ? "OK" : "NG")
+            << std::endl;
   std::cout << "vector find 9: "
             << (easyfind(numbers, 9) == numbers.end() ? "OK" : "NG")
             << std::endl;
@@ -25,8 +25,7 @@ int main() {
             << (list_found != values.end() && *list_found == 7 ? "OK" : "NG")
             << std::endl;
   std::cout << "list find 0: "
-            << (easyfind(values, 0) == values.end() ? "OK" : "NG")
-            << std::endl;
+            << (easyfind(values, 0) == values.end() ? "OK" : "NG") << std::endl;
 
   return 0;
 }
