@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <climits>
+#include <stdexcept>
 
 Span::Span(unsigned int capacity) : capacity_(capacity) {}
 

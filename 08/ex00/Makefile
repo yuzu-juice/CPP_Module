@@ -2,7 +2,7 @@ NAME = easyfind
 
 SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
-HEADERS = easyfind.hpp
+HEADERS = easyfind.hpp easyfind.tpp
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -pedantic -std=c++98
@@ -37,6 +37,6 @@ run: re
 
 format:
 	$(CLANG_DOCKER) \
-	"clang-format -i -style=Google --verbose *.cpp *.hpp"
+	"clang-format -i -style=Google --verbose *.cpp *.hpp *.tpp"
 
 .PHONY: all clean fclean re run format
