@@ -12,49 +12,65 @@
 
 namespace {
 
-typedef std::pair<unsigned int, unsigned int> NumberPair;
-
-void insertVectorValue(std::vector<unsigned int>& chain,
-                       const NumberPair& pair) {
-  std::vector<unsigned int>::iterator partner =
-      std::find(chain.begin(), chain.end(), pair.first);
-  chain.insert(std::lower_bound(chain.begin(), partner, pair.second),
-               pair.second);
-}
-
-void insertVectorPending(std::vector<unsigned int>& chain,
-                         const std::vector<NumberPair>& pairs) {
-  std::size_t previous = 1;
-  std::size_t jacobsthal = 3;
-  while (previous < pairs.size()) {
-    const std::size_t end = std::min(jacobsthal, pairs.size());
-    for (std::size_t i = end; i > previous; --i)
-      insertVectorValue(chain, pairs[i - 1]);
-    const std::size_t next = jacobsthal + 2 * previous;
-    previous = jacobsthal;
-    jacobsthal = next;
+template <typename Values>
+struct LessByValue {
+  explicit LessByValue(const Values& values) : values_(values) {}
+  bool operator()(std::size_t x, std::size_t y) const {
+    return values_[x] < values_[y];
   }
-}
+  const Values& values_;
+};
 
-void insertDequeValue(std::deque<unsigned int>& chain, const NumberPair& pair) {
-  std::deque<unsigned int>::iterator partner =
-      std::find(chain.begin(), chain.end(), pair.first);
-  chain.insert(std::lower_bound(chain.begin(), partner, pair.second),
-               pair.second);
-}
+template <typename Indices, typename Values>
+void mergeInsertion(Indices& items, const Values& values) {
+  const std::size_t n = items.size();
+  if (n < 2) return;
 
-void insertDequePending(std::deque<unsigned int>& chain,
-                        const std::deque<NumberPair>& pairs) {
-  std::size_t previous = 1;
-  std::size_t jacobsthal = 3;
-  while (previous < pairs.size()) {
-    const std::size_t end = std::min(jacobsthal, pairs.size());
-    for (std::size_t i = end; i > previous; --i)
-      insertDequeValue(chain, pairs[i - 1]);
-    const std::size_t next = jacobsthal + 2 * previous;
-    previous = jacobsthal;
-    jacobsthal = next;
+  Indices a, partner(values.size());
+  for (std::size_t i = 0; i + 1 < n; i += 2) {
+    std::size_t big = items[i], small = items[i + 1];
+    if (values[big] < values[small]) std::swap(big, small);
+    a.push_back(big);
+    partner[big] = small;
   }
+
+  mergeInsertion(a, values);
+
+  Indices b;
+  for (std::size_t i = 0; i < a.size(); ++i) b.push_back(partner[a[i]]);
+  if (n % 2 != 0) b.push_back(items[n - 1]);
+
+  Indices chain;
+  chain.push_back(b[0]);
+  chain.insert(chain.end(), a.begin(), a.end());
+
+  const LessByValue<Values> less(values);
+  std::size_t previous = 1, t = 3;
+  while (previous < b.size()) {
+    const std::size_t last = std::min(t, b.size());
+    for (std::size_t j = last; j > previous; --j) {
+      const typename Indices::iterator bound =
+          j <= a.size() ? std::find(chain.begin(), chain.end(), a[j - 1])
+                        : chain.end();
+      chain.insert(std::lower_bound(chain.begin(), bound, b[j - 1], less),
+                   b[j - 1]);
+    }
+    const std::size_t next = t + 2 * previous;
+    previous = t;
+    t = next;
+  }
+  items.swap(chain);
+}
+
+template <typename Indices, typename Values>
+void sortByMergeInsertion(Values& values) {
+  Indices order;
+  for (std::size_t i = 0; i < values.size(); ++i) order.push_back(i);
+  mergeInsertion(order, values);
+  Values sorted;
+  for (std::size_t i = 0; i < order.size(); ++i)
+    sorted.push_back(values[order[i]]);
+  values.swap(sorted);
 }
 
 }  // namespace
@@ -105,73 +121,11 @@ unsigned int PmergeMe::parse(const char* value) {
 }
 
 void PmergeMe::sortVector(std::vector<unsigned int>& values) {
-  if (values.size() < 2) return;
-
-  const bool has_odd = values.size() % 2 != 0;
-  const unsigned int odd = has_odd ? values.back() : 0;
-  std::vector<NumberPair> pairs;
-  for (std::size_t i = 0; i + 1 < values.size(); i += 2) {
-    if (values[i] < values[i + 1])
-      pairs.push_back(NumberPair(values[i + 1], values[i]));
-    else
-      pairs.push_back(NumberPair(values[i], values[i + 1]));
-  }
-
-  std::vector<unsigned int> maxima;
-  for (std::size_t i = 0; i < pairs.size(); ++i)
-    maxima.push_back(pairs[i].first);
-  sortVector(maxima);
-
-  std::vector<NumberPair> ordered;
-  for (std::size_t i = 0; i < maxima.size(); ++i) {
-    std::vector<NumberPair>::iterator pair = pairs.begin();
-    while (pair->first != maxima[i]) ++pair;
-    ordered.push_back(*pair);
-    pairs.erase(pair);
-  }
-
-  std::vector<unsigned int> chain;
-  chain.push_back(ordered[0].second);
-  chain.insert(chain.end(), maxima.begin(), maxima.end());
-  insertVectorPending(chain, ordered);
-  if (has_odd)
-    chain.insert(std::lower_bound(chain.begin(), chain.end(), odd), odd);
-  values.swap(chain);
+  sortByMergeInsertion<std::vector<std::size_t> >(values);
 }
 
 void PmergeMe::sortDeque(std::deque<unsigned int>& values) {
-  if (values.size() < 2) return;
-
-  const bool has_odd = values.size() % 2 != 0;
-  const unsigned int odd = has_odd ? values.back() : 0;
-  std::deque<NumberPair> pairs;
-  for (std::size_t i = 0; i + 1 < values.size(); i += 2) {
-    if (values[i] < values[i + 1])
-      pairs.push_back(NumberPair(values[i + 1], values[i]));
-    else
-      pairs.push_back(NumberPair(values[i], values[i + 1]));
-  }
-
-  std::deque<unsigned int> maxima;
-  for (std::size_t i = 0; i < pairs.size(); ++i)
-    maxima.push_back(pairs[i].first);
-  sortDeque(maxima);
-
-  std::deque<NumberPair> ordered;
-  for (std::size_t i = 0; i < maxima.size(); ++i) {
-    std::deque<NumberPair>::iterator pair = pairs.begin();
-    while (pair->first != maxima[i]) ++pair;
-    ordered.push_back(*pair);
-    pairs.erase(pair);
-  }
-
-  std::deque<unsigned int> chain;
-  chain.push_back(ordered[0].second);
-  chain.insert(chain.end(), maxima.begin(), maxima.end());
-  insertDequePending(chain, ordered);
-  if (has_odd)
-    chain.insert(std::lower_bound(chain.begin(), chain.end(), odd), odd);
-  values.swap(chain);
+  sortByMergeInsertion<std::deque<std::size_t> >(values);
 }
 
 void PmergeMe::run() {
