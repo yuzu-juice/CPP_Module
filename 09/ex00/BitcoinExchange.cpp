@@ -36,10 +36,7 @@ bool isValidDate(const std::string& date) {
   if (date[4] != '-' || date[7] != '-') return false;
   for (std::size_t i = 0; i < date.size(); ++i) {
     if (i == 4 || i == 7) continue;
-
-    const unsigned char character = date[i];
-    const bool is_digit = std::isdigit(character) != 0;
-    if (!is_digit) return false;
+    if (!std::isdigit(date[i])) return false;
   }
 
   const int year = numberAt(date, 0, 4);
