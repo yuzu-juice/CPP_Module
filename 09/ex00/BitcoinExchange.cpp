@@ -66,9 +66,6 @@ bool parseInputLine(const std::string& line, std::string& date, double& value) {
   const std::size_t separator = line.find(" | ");
   if (separator == std::string::npos) return false;
 
-  const std::size_t extra_separator = line.find(" | ", separator + 3);
-  if (extra_separator != std::string::npos) return false;
-
   date = line.substr(0, separator);
   const bool has_valid_date = isValidDate(date);
   if (!has_valid_date) return false;
