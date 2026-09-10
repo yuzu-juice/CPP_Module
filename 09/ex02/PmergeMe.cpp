@@ -222,6 +222,7 @@ void PmergeMe::run() {
   deque_time_ += elapsedMicroseconds(start);
 
   const bool results_match =
+      vector_.size() == deque_.size() &&
       std::equal(vector_.begin(), vector_.end(), deque_.begin());
   if (!results_match) throw std::runtime_error("container results differ.");
 
