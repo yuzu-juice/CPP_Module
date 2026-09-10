@@ -6,6 +6,7 @@
 
 class BitcoinExchange {
  public:
+  BitcoinExchange();
   explicit BitcoinExchange(const std::string& database_path);
   BitcoinExchange(const BitcoinExchange& other);
   BitcoinExchange& operator=(const BitcoinExchange& other);
@@ -16,8 +17,6 @@ class BitcoinExchange {
  private:
   std::map<std::string, double> rates_;
 
-  static bool isValidDate(const std::string& date);
-  static bool parseNumber(const std::string& text, double& value);
   double rateFor(const std::string& date) const;
 };
 

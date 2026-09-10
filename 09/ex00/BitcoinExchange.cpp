@@ -20,7 +20,35 @@ void stripCarriageReturn(std::string& line) {
     line.erase(line.size() - 1);
 }
 
+bool isValidDate(const std::string& date) {
+  if (date.size() != 10 || date[4] != '-' || date[7] != '-') return false;
+  for (std::size_t i = 0; i < date.size(); ++i) {
+    if (i != 4 && i != 7 && !std::isdigit(static_cast<unsigned char>(date[i])))
+      return false;
+  }
+
+  const int year = numberAt(date, 0, 4);
+  const int month = numberAt(date, 5, 2);
+  const int day = numberAt(date, 8, 2);
+  if (year == 0 || month < 1 || month > 12) return false;
+
+  static const int days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+  int limit = days[month - 1];
+  if (month == 2 && (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)))
+    limit = 29;
+  return day >= 1 && day <= limit;
+}
+
+bool parseNumber(const std::string& text, double& value) {
+  std::istringstream input(text);
+  if (!(input >> value) || value != value) return false;
+  input >> std::ws;
+  return input.eof();
+}
+
 }  // namespace
+
+BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange::BitcoinExchange(const std::string& database_path) {
   std::ifstream database(database_path.c_str());
@@ -56,32 +84,6 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
 }
 
 BitcoinExchange::~BitcoinExchange() {}
-
-bool BitcoinExchange::isValidDate(const std::string& date) {
-  if (date.size() != 10 || date[4] != '-' || date[7] != '-') return false;
-  for (std::size_t i = 0; i < date.size(); ++i) {
-    if (i != 4 && i != 7 && !std::isdigit(static_cast<unsigned char>(date[i])))
-      return false;
-  }
-
-  const int year = numberAt(date, 0, 4);
-  const int month = numberAt(date, 5, 2);
-  const int day = numberAt(date, 8, 2);
-  if (year == 0 || month < 1 || month > 12) return false;
-
-  static const int days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-  int limit = days[month - 1];
-  if (month == 2 && (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)))
-    limit = 29;
-  return day >= 1 && day <= limit;
-}
-
-bool BitcoinExchange::parseNumber(const std::string& text, double& value) {
-  std::istringstream input(text);
-  if (!(input >> value) || value != value) return false;
-  input >> std::ws;
-  return input.eof();
-}
 
 double BitcoinExchange::rateFor(const std::string& date) const {
   std::map<std::string, double>::const_iterator rate = rates_.lower_bound(date);
