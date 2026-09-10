@@ -11,8 +11,8 @@ int main(int argc, char** argv) {
   try {
     BitcoinExchange exchange("data.csv");
     exchange.process(argv[1]);
-  } catch (const std::exception& error) {
-    std::cerr << "Error: " << error.what() << std::endl;
+  } catch (const std::exception& e) {
+    std::cerr << "Error: " << e.what() << std::endl;
     return 1;
   }
   return 0;
