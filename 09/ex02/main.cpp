@@ -1,13 +1,14 @@
 #include <exception>
 #include <iostream>
-#include <stdexcept>
 
 #include "PmergeMe.hpp"
 
 int main(int argc, char** argv) {
+  if (argc < 2) {
+    std::cerr << "Usage: ./PmergeMe <positive integer> [...]" << std::endl;
+    return 1;
+  }
   try {
-    if (argc < 2) throw std::runtime_error("empty sequence.");
-
     PmergeMe sorter(argc - 1, argv + 1);
     sorter.run();
   } catch (const std::exception& error) {
