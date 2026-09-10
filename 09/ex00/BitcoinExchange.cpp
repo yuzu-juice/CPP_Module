@@ -59,7 +59,9 @@ bool parseNumber(const std::string& text, double& value) {
   if (input.fail() || value != value) return false;
 
   input >> std::ws;
-  return input.eof();
+  if (!input.eof()) return false;
+
+  return true;
 }
 
 bool parseInputLine(const std::string& line, std::string& date, double& value) {
