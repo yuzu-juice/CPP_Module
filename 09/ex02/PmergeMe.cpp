@@ -13,8 +13,7 @@ namespace {
 
 unsigned int parse(const char* value) {
   const std::string text(value);
-  const std::size_t not_a_digit = text.find_first_not_of("0123456789");
-  if (not_a_digit != std::string::npos)
+  if (text.find_first_not_of("0123456789") != std::string::npos)
     throw std::runtime_error("invalid number.");
 
   std::istringstream input(text);
@@ -177,19 +176,15 @@ void sortDeque(std::deque<unsigned int>& values) {
 PmergeMe::PmergeMe() : vector_time_(0), deque_time_(0) {}
 
 PmergeMe::PmergeMe(int count, char** values) : vector_time_(0), deque_time_(0) {
-  std::clock_t start = std::clock();
   for (int i = 0; i < count; ++i) {
     const unsigned int number = parse(values[i]);
     vector_.push_back(number);
   }
-  vector_time_ = elapsedMicroseconds(start);
 
-  start = std::clock();
   for (int i = 0; i < count; ++i) {
     const unsigned int number = parse(values[i]);
     deque_.push_back(number);
   }
-  deque_time_ = elapsedMicroseconds(start);
 }
 
 PmergeMe::PmergeMe(const PmergeMe& other)
@@ -215,15 +210,15 @@ void PmergeMe::run() {
 
   std::clock_t start = std::clock();
   sortVector(vector_);
-  vector_time_ += elapsedMicroseconds(start);
+  vector_time_ = elapsedMicroseconds(start);
 
   start = std::clock();
   sortDeque(deque_);
-  deque_time_ += elapsedMicroseconds(start);
+  deque_time_ = elapsedMicroseconds(start);
 
-  const bool results_match =
-      std::equal(vector_.begin(), vector_.end(), deque_.begin());
-  if (!results_match) throw std::runtime_error("container results differ.");
+  if (vector_.size() != deque_.size() ||
+      !std::equal(vector_.begin(), vector_.end(), deque_.begin()))
+    throw std::runtime_error("container results differ.");
 
   printSequence("After:", vector_);
   std::cout << std::fixed << std::setprecision(3)
