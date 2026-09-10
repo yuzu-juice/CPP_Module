@@ -125,8 +125,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
 BitcoinExchange::~BitcoinExchange() {}
 
 double BitcoinExchange::rateFor(const std::string& date) const {
-  std::map<std::string, double>::const_iterator rate = rates_.lower_bound(date);
-  if (rate != rates_.end() && rate->first == date) return rate->second;
+  std::map<std::string, double>::const_iterator rate = rates_.upper_bound(date);
   if (rate == rates_.begin())
     throw std::runtime_error("date precedes database.");
 
