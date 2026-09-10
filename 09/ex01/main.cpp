@@ -5,13 +5,14 @@
 
 int main(int argc, char** argv) {
   if (argc != 2) {
-    std::cerr << "Error" << std::endl;
+    std::cerr << "Usage: ./RPN \"<expression>\"" << std::endl;
     return 1;
   }
   try {
-    std::cout << RPN::evaluate(argv[1]) << std::endl;
-  } catch (const std::exception&) {
-    std::cerr << "Error" << std::endl;
+    const long result = RPN::evaluate(argv[1]);
+    std::cout << result << std::endl;
+  } catch (const std::exception& error) {
+    std::cerr << "Error: " << error.what() << std::endl;
     return 1;
   }
   return 0;

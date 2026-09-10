@@ -8,34 +8,47 @@
 namespace {
 
 bool isOperator(const std::string& token) {
-  return token.size() == 1 && (token[0] == '+' || token[0] == '-' ||
-                               token[0] == '*' || token[0] == '/');
+  if (token.size() != 1) return false;
+
+  const char symbol = token[0];
+  return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
+}
+
+bool isSingleDigit(const std::string& token) {
+  if (token.size() != 1) return false;
+
+  const char symbol = token[0];
+  return symbol >= '0' && symbol <= '9';
 }
 
 long calculate(long left, long right, char operation) {
   if (operation == '+') {
-    if ((right > 0 && left > LONG_MAX - right) ||
-        (right < 0 && left < LONG_MIN - right))
-      throw std::runtime_error("overflow");
+    const bool overflows = (right > 0 && left > LONG_MAX - right) ||
+                           (right < 0 && left < LONG_MIN - right);
+    if (overflows) throw std::runtime_error("overflow.");
     return left + right;
   }
   if (operation == '-') {
-    if ((right < 0 && left > LONG_MAX + right) ||
-        (right > 0 && left < LONG_MIN + right))
-      throw std::runtime_error("overflow");
+    const bool overflows = (right < 0 && left > LONG_MAX + right) ||
+                           (right > 0 && left < LONG_MIN + right);
+    if (overflows) throw std::runtime_error("overflow.");
     return left - right;
   }
   if (operation == '/') {
-    if (right == 0 || (left == LONG_MIN && right == -1))
-      throw std::runtime_error("invalid division");
+    const bool divides_by_zero = right == 0;
+    const bool overflows = left == LONG_MIN && right == -1;
+    if (divides_by_zero || overflows)
+      throw std::runtime_error("invalid division.");
     return left / right;
   }
+
   if (left == 0 || right == 0) return 0;
-  if ((left > 0 && right > 0 && left > LONG_MAX / right) ||
-      (left > 0 && right < 0 && right < LONG_MIN / left) ||
-      (left < 0 && right > 0 && left < LONG_MIN / right) ||
-      (left < 0 && right < 0 && left < LONG_MAX / right))
-    throw std::runtime_error("overflow");
+
+  const bool overflows = (left > 0 && right > 0 && left > LONG_MAX / right) ||
+                         (left > 0 && right < 0 && right < LONG_MIN / left) ||
+                         (left < 0 && right > 0 && left < LONG_MIN / right) ||
+                         (left < 0 && right < 0 && left < LONG_MAX / right);
+  if (overflows) throw std::runtime_error("overflow.");
   return left * right;
 }
 
@@ -46,20 +59,31 @@ long RPN::evaluate(const std::string& expression) {
   std::stack<long> values;
   std::string token;
 
-  while (input >> token) {
-    if (token.size() == 1 && token[0] >= '0' && token[0] <= '9') {
-      values.push(token[0] - '0');
-    } else if (isOperator(token) && values.size() >= 2) {
-      const long right = values.top();
-      values.pop();
-      const long left = values.top();
-      values.pop();
-      values.push(calculate(left, right, token[0]));
-    } else {
-      throw std::runtime_error("invalid expression");
+  while (true) {
+    input >> token;
+    if (input.fail()) break;
+
+    const bool is_value = isSingleDigit(token);
+    if (is_value) {
+      const long value = token[0] - '0';
+      values.push(value);
+      continue;
     }
+
+    const bool is_applicable = isOperator(token) && values.size() >= 2;
+    if (!is_applicable) throw std::runtime_error("invalid expression.");
+
+    const long right = values.top();
+    values.pop();
+    const long left = values.top();
+    values.pop();
+
+    const long result = calculate(left, right, token[0]);
+    values.push(result);
   }
-  if (values.size() != 1) throw std::runtime_error("invalid expression");
+
+  const bool has_single_result = values.size() == 1;
+  if (!has_single_result) throw std::runtime_error("invalid expression.");
   return values.top();
 }
 
