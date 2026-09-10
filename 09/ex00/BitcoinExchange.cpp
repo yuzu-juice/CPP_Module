@@ -124,15 +124,6 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
 
 BitcoinExchange::~BitcoinExchange() {}
 
-double BitcoinExchange::rateFor(const std::string& date) const {
-  std::map<std::string, double>::const_iterator rate = rates_.upper_bound(date);
-  if (rate == rates_.begin())
-    throw std::runtime_error("date precedes database.");
-
-  --rate;
-  return rate->second;
-}
-
 void BitcoinExchange::process(const std::string& input_path) const {
   std::ifstream input(input_path.c_str());
   if (!input.is_open()) throw std::runtime_error("could not open file.");
@@ -162,12 +153,15 @@ void BitcoinExchange::process(const std::string& input_path) const {
       continue;
     }
 
-    try {
-      const double rate = rateFor(date);
-      std::cout << date << " => " << value << " = " << value * rate
-                << std::endl;
-    } catch (const std::exception&) {
-      std::cerr << "Error: bad input => " << line << std::endl;
+    std::map<std::string, double>::const_iterator rate =
+        rates_.upper_bound(date);
+    if (rate == rates_.begin()) {
+      std::cerr << "Error: date precedes database." << std::endl;
+      continue;
     }
+
+    --rate;
+    std::cout << date << " => " << value << " = " << value * rate->second
+              << std::endl;
   }
 }

@@ -16,8 +16,6 @@ class BitcoinExchange {
 
  private:
   std::map<std::string, double> rates_;
-
-  double rateFor(const std::string& date) const;
 };
 
 #endif
