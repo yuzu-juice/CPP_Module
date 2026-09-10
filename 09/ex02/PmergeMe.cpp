@@ -30,8 +30,7 @@ void mergeInsertion(Indices& items, const Values& values) {
   for (std::size_t i = 0; i + 1 < n; i += 2) {
     std::size_t big = items[i];
     std::size_t small = items[i + 1];
-    const bool is_out_of_order = values[big] < values[small];
-    if (is_out_of_order) std::swap(big, small);
+    if (values[big] < values[small]) std::swap(big, small);
     a.push_back(big);
     partner[big] = small;
   }
@@ -39,12 +38,8 @@ void mergeInsertion(Indices& items, const Values& values) {
   mergeInsertion(a, values);
 
   Indices b;
-  for (std::size_t i = 0; i < a.size(); ++i) {
-    const std::size_t small = partner[a[i]];
-    b.push_back(small);
-  }
-  const bool has_odd_element = n % 2 != 0;
-  if (has_odd_element) b.push_back(items[n - 1]);
+  for (std::size_t i = 0; i < a.size(); ++i) b.push_back(partner[a[i]]);
+  if (n % 2 != 0) b.push_back(items[n - 1]);
 
   Indices chain;
   chain.push_back(b[0]);
@@ -56,8 +51,8 @@ void mergeInsertion(Indices& items, const Values& values) {
     const std::size_t last = std::min(t, b.size());
     for (std::size_t j = last; j > previous; --j) {
       typename Indices::iterator bound = chain.end();
-      const bool has_partner = j <= a.size();
-      if (has_partner) bound = std::find(chain.begin(), chain.end(), a[j - 1]);
+      if (j <= a.size())
+        bound = std::find(chain.begin(), chain.end(), a[j - 1]);
 
       const std::size_t pending = b[j - 1];
       const typename Indices::iterator position =
@@ -77,10 +72,8 @@ void sortByMergeInsertion(Values& values) {
   for (std::size_t i = 0; i < values.size(); ++i) order.push_back(i);
   mergeInsertion(order, values);
   Values sorted;
-  for (std::size_t i = 0; i < order.size(); ++i) {
-    const std::size_t index = order[i];
-    sorted.push_back(values[index]);
-  }
+  for (std::size_t i = 0; i < order.size(); ++i)
+    sorted.push_back(values[order[i]]);
   values.swap(sorted);
 }
 
@@ -120,18 +113,16 @@ unsigned int PmergeMe::parse(const char* value) {
   const std::string text(value);
   if (text.empty()) throw std::runtime_error("invalid number.");
 
-  for (std::size_t i = 0; i < text.size(); ++i) {
-    const bool is_digit = text[i] >= '0' && text[i] <= '9';
-    if (!is_digit) throw std::runtime_error("invalid number.");
-  }
+  for (std::size_t i = 0; i < text.size(); ++i)
+    if (text[i] < '0' || text[i] > '9')
+      throw std::runtime_error("invalid number.");
 
   std::istringstream input(text);
   unsigned long number;
   input >> number;
-  if (input.fail()) throw std::runtime_error("invalid number.");
-  if (!input.eof()) throw std::runtime_error("invalid number.");
-  if (number == 0) throw std::runtime_error("invalid number.");
-  if (number > UINT_MAX) throw std::runtime_error("invalid number.");
+  if (input.fail() || !input.eof()) throw std::runtime_error("invalid number.");
+  if (number == 0 || number > UINT_MAX)
+    throw std::runtime_error("invalid number.");
 
   return static_cast<unsigned int>(number);
 }

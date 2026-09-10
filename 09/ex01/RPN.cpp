@@ -16,19 +16,14 @@ bool isOperator(const std::string& token) {
 
 bool isSingleDigit(const std::string& token) {
   if (token.size() != 1) return false;
-
-  const char symbol = token[0];
-  return symbol >= '0' && symbol <= '9';
+  return token[0] >= '0' && token[0] <= '9';
 }
 
 long calculate(long left, long right, char operation) {
   if (operation == '+') return left + right;
   if (operation == '-') return left - right;
   if (operation == '*') return left * right;
-
-  const bool divides_by_zero = right == 0;
-  const bool overflows = left == LONG_MIN && right == -1;
-  if (divides_by_zero || overflows)
+  if (right == 0 || (left == LONG_MIN && right == -1))
     throw std::runtime_error("invalid division.");
   return left / right;
 }
@@ -46,8 +41,7 @@ long RPN::evaluate(const std::string& expression) {
 
     const bool is_value = isSingleDigit(token);
     if (is_value) {
-      const long value = token[0] - '0';
-      values.push(value);
+      values.push(token[0] - '0');
       continue;
     }
 
@@ -62,9 +56,7 @@ long RPN::evaluate(const std::string& expression) {
     const long result = calculate(left, right, token[0]);
     values.push(result);
   }
-
-  const bool has_single_result = values.size() == 1;
-  if (!has_single_result) throw std::runtime_error("invalid expression.");
+  if (values.size() != 1) throw std::runtime_error("invalid expression.");
   return values.top();
 }
 
