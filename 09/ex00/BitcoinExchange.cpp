@@ -1,6 +1,5 @@
 #include "BitcoinExchange.hpp"
 
-#include <cctype>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -34,10 +33,10 @@ bool readLine(std::istream& stream, std::string& line) {
 bool isValidDate(const std::string& date) {
   if (date.size() != 10) return false;
   if (date[4] != '-' || date[7] != '-') return false;
-  for (std::size_t i = 0; i < date.size(); ++i) {
-    if (i == 4 || i == 7) continue;
-    if (!std::isdigit(date[i])) return false;
-  }
+
+  const std::string digits =
+      date.substr(0, 4) + date.substr(5, 2) + date.substr(8, 2);
+  if (digits.find_first_not_of("0123456789") != std::string::npos) return false;
 
   const int year = numberAt(date, 0, 4);
   const int month = numberAt(date, 5, 2);
