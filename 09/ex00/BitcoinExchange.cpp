@@ -43,7 +43,7 @@ bool isValidDate(const std::string& date) {
   const int day = numberAt(date, 8, 2);
   if (year == 0 || month < 1 || month > 12) return false;
 
-  static const int days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+  const int days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
   const bool is_leap = year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);
   const int limit = (month == 2 && is_leap) ? 29 : days[month - 1];
   return day >= 1 && day <= limit;

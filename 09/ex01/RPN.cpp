@@ -11,20 +11,29 @@ bool isOperator(const std::string& token) {
   if (token.size() != 1) return false;
 
   const char symbol = token[0];
-  return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
+  if (symbol == '+')
+    return true;
+  if (symbol == '-')
+    return true;
+  if (symbol == '*')
+    return true;
+  if (symbol == '/')
+    return true;
+  return false;
 }
 
 bool isSingleDigit(const std::string& token) {
   if (token.size() != 1) return false;
-  return token[0] >= '0' && token[0] <= '9';
+  if (token[0] >= '0' && token[0] <= '9')
+    return true;
+  return false;
 }
 
 long calculate(long left, long right, char operation) {
   if (operation == '+') return left + right;
   if (operation == '-') return left - right;
   if (operation == '*') return left * right;
-  if (right == 0 || (left == LONG_MIN && right == -1))
-    throw std::runtime_error("invalid division.");
+  if (right == 0) throw std::runtime_error("divide by zero.");
   return left / right;
 }
 
