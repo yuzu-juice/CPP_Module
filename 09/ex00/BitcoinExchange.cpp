@@ -1,6 +1,5 @@
 #include "BitcoinExchange.hpp"
 
-#include <cctype>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -34,13 +33,10 @@ bool readLine(std::istream& stream, std::string& line) {
 bool isValidDate(const std::string& date) {
   if (date.size() != 10) return false;
   if (date[4] != '-' || date[7] != '-') return false;
-  for (std::size_t i = 0; i < date.size(); ++i) {
-    if (i == 4 || i == 7) continue;
 
-    const unsigned char character = date[i];
-    const bool is_digit = std::isdigit(character) != 0;
-    if (!is_digit) return false;
-  }
+  const std::string digits =
+      date.substr(0, 4) + date.substr(5, 2) + date.substr(8, 2);
+  if (digits.find_first_not_of("0123456789") != std::string::npos) return false;
 
   const int year = numberAt(date, 0, 4);
   const int month = numberAt(date, 5, 2);
@@ -59,15 +55,14 @@ bool parseNumber(const std::string& text, double& value) {
   if (input.fail() || value != value) return false;
 
   input >> std::ws;
-  return input.eof();
+  if (!input.eof()) return false;
+
+  return true;
 }
 
 bool parseInputLine(const std::string& line, std::string& date, double& value) {
   const std::size_t separator = line.find(" | ");
   if (separator == std::string::npos) return false;
-
-  const std::size_t extra_separator = line.find(" | ", separator + 3);
-  if (extra_separator != std::string::npos) return false;
 
   date = line.substr(0, separator);
   const bool has_valid_date = isValidDate(date);
@@ -124,15 +119,6 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
 
 BitcoinExchange::~BitcoinExchange() {}
 
-double BitcoinExchange::rateFor(const std::string& date) const {
-  std::map<std::string, double>::const_iterator rate = rates_.upper_bound(date);
-  if (rate == rates_.begin())
-    throw std::runtime_error("date precedes database.");
-
-  --rate;
-  return rate->second;
-}
-
 void BitcoinExchange::process(const std::string& input_path) const {
   std::ifstream input(input_path.c_str());
   if (!input.is_open()) throw std::runtime_error("could not open file.");
@@ -162,12 +148,15 @@ void BitcoinExchange::process(const std::string& input_path) const {
       continue;
     }
 
-    try {
-      const double rate = rateFor(date);
-      std::cout << date << " => " << value << " = " << value * rate
-                << std::endl;
-    } catch (const std::exception&) {
-      std::cerr << "Error: bad input => " << line << std::endl;
+    std::map<std::string, double>::const_iterator rate =
+        rates_.upper_bound(date);
+    if (rate == rates_.begin()) {
+      std::cerr << "Error: date precedes database." << std::endl;
+      continue;
     }
+
+    --rate;
+    std::cout << date << " => " << value << " = " << value * rate->second
+              << std::endl;
   }
 }
