@@ -22,34 +22,15 @@ bool isSingleDigit(const std::string& token) {
 }
 
 long calculate(long left, long right, char operation) {
-  if (operation == '+') {
-    const bool overflows = (right > 0 && left > LONG_MAX - right) ||
-                           (right < 0 && left < LONG_MIN - right);
-    if (overflows) throw std::runtime_error("overflow.");
-    return left + right;
-  }
-  if (operation == '-') {
-    const bool overflows = (right < 0 && left > LONG_MAX + right) ||
-                           (right > 0 && left < LONG_MIN + right);
-    if (overflows) throw std::runtime_error("overflow.");
-    return left - right;
-  }
-  if (operation == '/') {
-    const bool divides_by_zero = right == 0;
-    const bool overflows = left == LONG_MIN && right == -1;
-    if (divides_by_zero || overflows)
-      throw std::runtime_error("invalid division.");
-    return left / right;
-  }
+  if (operation == '+') return left + right;
+  if (operation == '-') return left - right;
+  if (operation == '*') return left * right;
 
-  if (left == 0 || right == 0) return 0;
-
-  const bool overflows = (left > 0 && right > 0 && left > LONG_MAX / right) ||
-                         (left > 0 && right < 0 && right < LONG_MIN / left) ||
-                         (left < 0 && right > 0 && left < LONG_MIN / right) ||
-                         (left < 0 && right < 0 && left < LONG_MAX / right);
-  if (overflows) throw std::runtime_error("overflow.");
-  return left * right;
+  const bool divides_by_zero = right == 0;
+  const bool overflows = left == LONG_MIN && right == -1;
+  if (divides_by_zero || overflows)
+    throw std::runtime_error("invalid division.");
+  return left / right;
 }
 
 }  // namespace
