@@ -8,25 +8,43 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
-#include <utility>
 
 namespace {
 
-template <typename Values>
-struct LessByValue {
-  explicit LessByValue(const Values& values) : values_(values) {}
+unsigned int parse(const char* value) {
+  const std::string text(value);
+  if (text.empty()) throw std::runtime_error("invalid number.");
+
+  for (std::size_t i = 0; i < text.size(); ++i)
+    if (text[i] < '0' || text[i] > '9')
+      throw std::runtime_error("invalid number.");
+
+  std::istringstream input(text);
+  unsigned long number;
+  input >> number;
+  if (input.fail() || !input.eof()) throw std::runtime_error("invalid number.");
+  if (number == 0 || number > UINT_MAX)
+    throw std::runtime_error("invalid number.");
+
+  return static_cast<unsigned int>(number);
+}
+
+struct LessInVector {
+  explicit LessInVector(const std::vector<unsigned int>& values)
+      : values_(values) {}
   bool operator()(std::size_t x, std::size_t y) const {
     return values_[x] < values_[y];
   }
-  const Values& values_;
+  const std::vector<unsigned int>& values_;
 };
 
-template <typename Indices, typename Values>
-void mergeInsertion(Indices& items, const Values& values) {
+void mergeInsertionVector(std::vector<std::size_t>& items,
+                          const std::vector<unsigned int>& values) {
   const std::size_t n = items.size();
   if (n < 2) return;
 
-  Indices a, partner(values.size());
+  std::vector<std::size_t> a;
+  std::vector<std::size_t> partner(values.size());
   for (std::size_t i = 0; i + 1 < n; i += 2) {
     std::size_t big = items[i];
     std::size_t small = items[i + 1];
@@ -35,27 +53,28 @@ void mergeInsertion(Indices& items, const Values& values) {
     partner[big] = small;
   }
 
-  mergeInsertion(a, values);
+  mergeInsertionVector(a, values);
 
-  Indices b;
+  std::vector<std::size_t> b;
   for (std::size_t i = 0; i < a.size(); ++i) b.push_back(partner[a[i]]);
   if (n % 2 != 0) b.push_back(items[n - 1]);
 
-  Indices chain;
+  std::vector<std::size_t> chain;
   chain.push_back(b[0]);
   chain.insert(chain.end(), a.begin(), a.end());
 
-  const LessByValue<Values> less(values);
-  std::size_t previous = 1, t = 3;
+  const LessInVector less(values);
+  std::size_t previous = 1;
+  std::size_t t = 3;
   while (previous < b.size()) {
     const std::size_t last = std::min(t, b.size());
     for (std::size_t j = last; j > previous; --j) {
-      typename Indices::iterator bound = chain.end();
+      std::vector<std::size_t>::iterator bound = chain.end();
       if (j <= a.size())
         bound = std::find(chain.begin(), chain.end(), a[j - 1]);
 
       const std::size_t pending = b[j - 1];
-      const typename Indices::iterator position =
+      const std::vector<std::size_t>::iterator position =
           std::lower_bound(chain.begin(), bound, pending, less);
       chain.insert(position, pending);
     }
@@ -66,18 +85,87 @@ void mergeInsertion(Indices& items, const Values& values) {
   items.swap(chain);
 }
 
-template <typename Indices, typename Values>
-void sortByMergeInsertion(Values& values) {
-  Indices order;
+void sortVector(std::vector<unsigned int>& values) {
+  std::vector<std::size_t> order;
   for (std::size_t i = 0; i < values.size(); ++i) order.push_back(i);
-  mergeInsertion(order, values);
-  Values sorted;
+  mergeInsertionVector(order, values);
+
+  std::vector<unsigned int> sorted;
+  for (std::size_t i = 0; i < order.size(); ++i)
+    sorted.push_back(values[order[i]]);
+  values.swap(sorted);
+}
+
+struct LessInDeque {
+  explicit LessInDeque(const std::deque<unsigned int>& values)
+      : values_(values) {}
+  bool operator()(std::size_t x, std::size_t y) const {
+    return values_[x] < values_[y];
+  }
+  const std::deque<unsigned int>& values_;
+};
+
+void mergeInsertionDeque(std::deque<std::size_t>& items,
+                         const std::deque<unsigned int>& values) {
+  const std::size_t n = items.size();
+  if (n < 2) return;
+
+  std::deque<std::size_t> a;
+  std::deque<std::size_t> partner(values.size());
+  for (std::size_t i = 0; i + 1 < n; i += 2) {
+    std::size_t big = items[i];
+    std::size_t small = items[i + 1];
+    if (values[big] < values[small]) std::swap(big, small);
+    a.push_back(big);
+    partner[big] = small;
+  }
+
+  mergeInsertionDeque(a, values);
+
+  std::deque<std::size_t> b;
+  for (std::size_t i = 0; i < a.size(); ++i) b.push_back(partner[a[i]]);
+  if (n % 2 != 0) b.push_back(items[n - 1]);
+
+  std::deque<std::size_t> chain;
+  chain.push_back(b[0]);
+  chain.insert(chain.end(), a.begin(), a.end());
+
+  const LessInDeque less(values);
+  std::size_t previous = 1;
+  std::size_t t = 3;
+  while (previous < b.size()) {
+    const std::size_t last = std::min(t, b.size());
+    for (std::size_t j = last; j > previous; --j) {
+      std::deque<std::size_t>::iterator bound = chain.end();
+      if (j <= a.size())
+        bound = std::find(chain.begin(), chain.end(), a[j - 1]);
+
+      const std::size_t pending = b[j - 1];
+      const std::deque<std::size_t>::iterator position =
+          std::lower_bound(chain.begin(), bound, pending, less);
+      chain.insert(position, pending);
+    }
+    const std::size_t next = t + 2 * previous;
+    previous = t;
+    t = next;
+  }
+  items.swap(chain);
+}
+
+void sortDeque(std::deque<unsigned int>& values) {
+  std::deque<std::size_t> order;
+  for (std::size_t i = 0; i < values.size(); ++i) order.push_back(i);
+  mergeInsertionDeque(order, values);
+
+  std::deque<unsigned int> sorted;
   for (std::size_t i = 0; i < order.size(); ++i)
     sorted.push_back(values[order[i]]);
   values.swap(sorted);
 }
 
 }  // namespace
+
+PmergeMe::PmergeMe() : vector_time_(0), deque_time_(0) {}
 
 PmergeMe::PmergeMe(int count, char** values) : vector_time_(0), deque_time_(0) {
   std::clock_t start = std::clock();
@@ -109,32 +197,6 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
 
 PmergeMe::~PmergeMe() {}
 
-unsigned int PmergeMe::parse(const char* value) {
-  const std::string text(value);
-  if (text.empty()) throw std::runtime_error("invalid number.");
-
-  for (std::size_t i = 0; i < text.size(); ++i)
-    if (text[i] < '0' || text[i] > '9')
-      throw std::runtime_error("invalid number.");
-
-  std::istringstream input(text);
-  unsigned long number;
-  input >> number;
-  if (input.fail() || !input.eof()) throw std::runtime_error("invalid number.");
-  if (number == 0 || number > UINT_MAX)
-    throw std::runtime_error("invalid number.");
-
-  return static_cast<unsigned int>(number);
-}
-
-void PmergeMe::sortVector(std::vector<unsigned int>& values) {
-  sortByMergeInsertion<std::vector<std::size_t> >(values);
-}
-
-void PmergeMe::sortDeque(std::deque<unsigned int>& values) {
-  sortByMergeInsertion<std::deque<std::size_t> >(values);
-}
-
 void PmergeMe::run() {
   std::cout << "Before:";
   for (std::size_t i = 0; i < vector_.size(); ++i)
@@ -145,10 +207,12 @@ void PmergeMe::run() {
   sortVector(vector_);
   vector_time_ +=
       static_cast<double>(std::clock() - start) * 1000000.0 / CLOCKS_PER_SEC;
+
   start = std::clock();
   sortDeque(deque_);
   deque_time_ +=
       static_cast<double>(std::clock() - start) * 1000000.0 / CLOCKS_PER_SEC;
+
   const bool results_match =
       std::equal(vector_.begin(), vector_.end(), deque_.begin());
   if (!results_match) throw std::runtime_error("container results differ.");

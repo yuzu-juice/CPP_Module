@@ -6,6 +6,7 @@
 
 class PmergeMe {
  public:
+  PmergeMe();
   PmergeMe(int count, char** values);
   PmergeMe(const PmergeMe& other);
   PmergeMe& operator=(const PmergeMe& other);
@@ -18,10 +19,6 @@ class PmergeMe {
   std::deque<unsigned int> deque_;
   double vector_time_;
   double deque_time_;
-
-  static unsigned int parse(const char* value);
-  static void sortVector(std::vector<unsigned int>& values);
-  static void sortDeque(std::deque<unsigned int>& values);
 };
 
 #endif
